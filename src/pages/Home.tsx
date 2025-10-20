@@ -138,7 +138,7 @@ export default function Home() {
       <section className="w-full max-w-4xl mx-auto bg-gradient-to-br from-orange-100 to-yellow-100 p-6 rounded-xl shadow-lg border-2 border-yellow-400 space-y-2">
         <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">📞 Contact Us 📞</h2>
         <div className="space-y-2 text-orange-800 font-medium">
-          <p><strong>📱 Phone:</strong> +91 98765 43210</p>
+          <p><strong>📱 Phone:</strong> <a href="tel:+918143223993" className="text-blue-600 hover:text-blue-800 underline font-bold transition-colors">+91 8143223993</a></p>
           <p><strong>📧 Email:</strong> contact@gayatriladieshostel.com</p>
           <p className="text-center mt-4 text-lg font-bold text-orange-600">🪔 Happy Diwali! May your home be filled with light and joy! 🪔</p>
         </div>

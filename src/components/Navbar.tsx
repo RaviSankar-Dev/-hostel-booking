@@ -21,6 +21,7 @@ function Navbar() {
     { name: "Rooms", path: "/rooms" },
     { name: "Facilities", path: "/facilities" },
     { name: "Food Menu", path: "/foodmenu" },
+    { name: "About Us", path: "/about" },
   ];
 
   return (
@@ -47,7 +48,8 @@ function Navbar() {
                 {link.name === "Home" ? "🏠 Home" : 
                  link.name === "Rooms" ? "🏠 Rooms" :
                  link.name === "Facilities" ? "🏠 Facilities" :
-                 link.name === "Food Menu" ? "🍛 Food Menu" : link.name}
+                 link.name === "Food Menu" ? "🍛 Food Menu" :
+                 link.name === "About Us" ? "👥 About Us" : link.name}
               </Link>
             ))}
 
@@ -117,7 +119,8 @@ function Navbar() {
                 {link.name === "Home" ? "🏠 Home" : 
                  link.name === "Rooms" ? "🏠 Rooms" :
                  link.name === "Facilities" ? "🏠 Facilities" :
-                 link.name === "Food Menu" ? "🍛 Food Menu" : link.name}
+                 link.name === "Food Menu" ? "🍛 Food Menu" :
+                 link.name === "About Us" ? "👥 About Us" : link.name}
               </Link>
             ))}
 

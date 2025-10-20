@@ -24,6 +24,8 @@ function Auth() {
     city: "",
     guardian: "",
     aadhaar: "",
+    room: "",
+    bed: "",
   });
   const [showForgot, setShowForgot] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
@@ -41,8 +43,17 @@ function Auth() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Debug: Log the form data
+    console.log("Form data:", form);
+    console.log("Aadhaar length:", form.aadhaar.length);
+    console.log("Aadhaar value:", form.aadhaar);
 
     if (isLogin) {
       // Login
@@ -53,18 +64,20 @@ function Auth() {
     } else {
       // Register
       if (!/^\d{12}$/.test(form.aadhaar)) {
-        return alert("Please enter a valid 12-digit Aadhaar number");
+        return alert(`Please enter a valid 12-digit Aadhaar number. You entered: "${form.aadhaar}" (${form.aadhaar.length} digits)`);
       }
       if (students.find(s => s.email === form.email)) return alert("Email already exists");
+      
+      // Validate room and bed selection
+      if (!form.room.trim()) return alert("Please select a room number");
+      if (!form.bed.trim()) return alert("Please select a bed number");
+      
+      // Check if room and bed combination is already taken
+      const existingStudent = students.find(s => s.room === form.room && s.bed === form.bed);
+      if (existingStudent) {
+        return alert(`Room ${form.room} Bed ${form.bed} is already occupied. Please choose a different room/bed combination.`);
+      }
 
-      // Assign room & bed automatically
-      const rooms: string[] = JSON.parse(localStorage.getItem("students") || "[]")
-        .map((s: any) => s.room);
-      const allRooms: string[] = JSON.parse(localStorage.getItem("allRooms") || `["Room1","Room2","Room3"]`);
-      const availableRoom = allRooms.find(r => !rooms.includes(r)) || "Room1";
-
-      // Count beds in that room
-      const bedsInRoom = students.filter(s => s.room === availableRoom).length + 1;
       const newStudent: Student = {
         email: form.email,
         password: form.password,
@@ -72,8 +85,8 @@ function Auth() {
         city: form.city,
         guardian: form.guardian,
         aadhaar: form.aadhaar,
-        room: availableRoom,
-        bed: `Bed${bedsInRoom}`,
+        room: form.room,
+        bed: form.bed,
         payments: {},
       };
 
@@ -118,6 +131,7 @@ function Auth() {
     setGeneratedOtp("");
   };
 
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 flex items-center justify-center p-4 relative">
       {/* Left Side Firecrackers */}
@@ -152,10 +166,12 @@ function Auth() {
         <h2 className="text-lg font-bold">🎆 Happy Diwali! 🪔</h2>
       </div>
       
+
       <div className="max-w-md w-full p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300 mt-16">
         <h1 className="text-2xl font-bold mb-4 text-center bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
           {showForgot ? "🪔 Reset Password 🪔" : isLogin ? "🔑 Login 🔑" : "📝 Register 📝"}
         </h1>
+        
       {!showForgot && (
         <form onSubmit={handleSubmit} className="space-y-4">
         {!isLogin && (
@@ -197,11 +213,47 @@ function Auth() {
                 setForm({ ...form, aadhaar: onlyDigits.slice(0, 12) });
               }}
               inputMode="numeric"
-              pattern="\\d{12}"
+              pattern="\d{12}"
               maxLength={12}
               className="w-full border p-2 rounded"
               required
             />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-bold text-orange-700 mb-2">🏠 Room Number:</label>
+                <select
+                  name="room"
+                  value={form.room}
+                  onChange={handleSelectChange}
+                  className="w-full border-2 border-yellow-300 p-2 rounded-lg focus:border-orange-500 focus:outline-none bg-gradient-to-r from-yellow-50 to-orange-50"
+                  required
+                >
+                  <option value="">Select Room</option>
+                  {Array.from({ length: 50 }, (_, i) => (
+                    <option key={i + 1} value={`Room${i + 1}`}>
+                      🏠 Room {i + 1}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-orange-700 mb-2">🛏️ Bed Number:</label>
+                <select
+                  name="bed"
+                  value={form.bed}
+                  onChange={handleSelectChange}
+                  className="w-full border-2 border-yellow-300 p-2 rounded-lg focus:border-orange-500 focus:outline-none bg-gradient-to-r from-yellow-50 to-orange-50"
+                  required
+                >
+                  <option value="">Select Bed</option>
+                  {Array.from({ length: 7 }, (_, i) => (
+                    <option key={i + 1} value={`Bed${i + 1}`}>
+                      🛏️ Bed {i + 1}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
           </>
         )}
         <input
@@ -238,7 +290,7 @@ function Auth() {
         </button>
         </form>
       )}
-      {showForgot && (
+        {showForgot && (
         <>
           {!otpSent ? (
             <form onSubmit={handleResetPassword} className="space-y-4">
@@ -308,7 +360,7 @@ function Auth() {
             </form>
           )}
         </>
-      )}
+        )}
         <p className="mt-4 text-center text-orange-700 font-medium">
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
           <button className="text-orange-600 font-bold hover:text-red-600 transition" onClick={() => setIsLogin(!isLogin)}>

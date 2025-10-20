@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Rooms from "./pages/Rooms";
 import Facilities from "./pages/Facilities";
 import FoodMenu from "./pages/FoodMenu";
+import About from "./pages/About";
 
 import Dashboard from "./pages/Dashboard"; // Student Dashboard
 import AdminDashboard from "./pages/AdminDashboard";
@@ -114,6 +115,18 @@ function App() {
               <Navigate to="/admin" replace />
             ) : (
               <FoodMenu />
+            )
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            currentUser ? (
+              <Navigate to="/dashboard" replace />
+            ) : currentAdmin ? (
+              <Navigate to="/admin" replace />
+            ) : (
+              <About />
             )
           }
         />

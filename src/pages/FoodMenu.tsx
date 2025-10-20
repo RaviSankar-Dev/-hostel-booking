@@ -95,8 +95,8 @@ function FoodMenu() {
               className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-orange-900/80 via-yellow-600/30 to-transparent"></div>
-            <div className="absolute bottom-5 left-0 right-0 px-4 text-center text-white">
-              <h3 className="text-xl font-bold mb-1 drop-shadow-lg">{dayMenu.day}</h3>
+            <div className="absolute bottom-5 left-0 right-0 px-4 text-center">
+              <h3 className="text-xl font-bold text-white mb-2 drop-shadow-lg">{dayMenu.day}</h3>
               <p className="text-sm font-medium drop-shadow-md">
                 <strong className="text-yellow-200">🍳 Breakfast:</strong> <span className="text-yellow-100">{dayMenu.items.breakfast}</span><br/>
                 <strong className="text-yellow-200">🍽️ Lunch:</strong> <span className="text-yellow-100">{dayMenu.items.lunch}</span><br/>

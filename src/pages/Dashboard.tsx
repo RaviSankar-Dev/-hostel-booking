@@ -17,6 +17,7 @@ interface Student {
   room: string;
   bed?: string;
   password: string;
+  profilePicture?: string;
   payments?: { [month: string]: "Paid" | "Pending" };
 }
 
@@ -39,6 +40,9 @@ function Dashboard() {
   const [newCategory, setNewCategory] = useState("general");
   const [submitted, setSubmitted] = useState(false);
   const [complaintEnabled, setComplaintEnabled] = useState(true);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [profilePicture, setProfilePicture] = useState("");
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
 
   // Accordion controls
   const [foodOpen, setFoodOpen] = useState(false);
@@ -66,6 +70,11 @@ function Dashboard() {
 
     const enabled = JSON.parse(localStorage.getItem("complaintEnabled") || "true");
     setComplaintEnabled(enabled);
+
+    // Load profile picture
+    if (current) {
+      setProfilePicture(current.profilePicture || "");
+    }
 
     // Load food menu
     const savedMenu = JSON.parse(localStorage.getItem("foodMenu") || "{}");
@@ -100,6 +109,37 @@ function Dashboard() {
     setNewCategory("general");
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
+  };
+
+  const handleProfilePictureUpdate = () => {
+    if (!student || (!profilePicture.trim() && !capturedImage)) return;
+
+    const users: Student[] = JSON.parse(localStorage.getItem("students") || "[]");
+    const userIndex = users.findIndex(u => u.email === student.email);
+    
+    if (userIndex !== -1) {
+      users[userIndex].profilePicture = capturedImage || profilePicture;
+      localStorage.setItem("students", JSON.stringify(users));
+      setStudent(users[userIndex]);
+      setShowProfileModal(false);
+      setCapturedImage(null);
+      setProfilePicture("");
+      alert("Profile picture updated successfully!");
+    }
+  };
+
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        setCapturedImage(result);
+        setProfilePicture(result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   if (!student) return <p className="text-center mt-10">Loading...</p>;
@@ -143,16 +183,59 @@ function Dashboard() {
         🏠 Welcome, {student.name} 🏠
       </h1>
 
-      {/* Profile Section */}
-      <section className="mb-6 p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300 space-y-2">
-        <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">👤 Profile 👤</h2>
-        <p><strong>Email:</strong> {student.email}</p>
-        <p><strong>Full Name:</strong> {student.name}</p>
-        <p><strong>City/Village:</strong> {student.city}</p>
-        <p><strong>Guardian Number:</strong> {student.guardian}</p>
-        <p><strong>Room:</strong> {student.room}</p>
-        <p><strong>Bed:</strong> {student.bed || "Not Assigned"}</p>
-        <p><strong>Aadhaar:</strong> {student.aadhaar}</p>
+      {/* Modern Profile Section */}
+      <section className="mb-8 p-8 bg-gradient-to-br from-white via-yellow-50 to-orange-50 rounded-2xl shadow-2xl border-4 border-yellow-300 hover:shadow-3xl transition-all duration-300">
+        <div className="flex flex-col md:flex-row items-center gap-6">
+          {/* Profile Picture */}
+          <div className="relative">
+            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-yellow-400 shadow-xl">
+              {student.profilePicture ? (
+                <img 
+                  src={student.profilePicture} 
+                  alt="Profile" 
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
+                  <span className="text-4xl text-white font-bold">{student.name.charAt(0)}</span>
+                </div>
+              )}
+            </div>
+            <button
+              onClick={() => setShowProfileModal(true)}
+              className="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+            >
+              <span className="text-white text-lg">📷</span>
+            </button>
+          </div>
+
+          {/* Profile Info */}
+          <div className="flex-1 text-center md:text-left">
+            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+              👤 {student.name} 👤
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-orange-800">
+              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+                <span className="font-bold">📧 Email:</span> {student.email}
+              </div>
+              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+                <span className="font-bold">🏙️ City/Village:</span> {student.city}
+              </div>
+              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+                <span className="font-bold">👨‍👩‍👧‍👦 Guardian:</span> {student.guardian}
+              </div>
+              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+                <span className="font-bold">🆔 Aadhaar:</span> {student.aadhaar}
+              </div>
+              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+                <span className="font-bold">🏠 Room:</span> {student.room}
+              </div>
+              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+                <span className="font-bold">🛏️ Bed:</span> {student.bed || "Not Assigned"}
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Food Menu Accordion */}
@@ -292,6 +375,89 @@ function Dashboard() {
           <p className="text-lg font-bold text-orange-600">🪔 Happy Diwali! May your stay be filled with light and joy! 🪔</p>
         </div>
       </section>
+
+      {/* Profile Picture Modal */}
+      {showProfileModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-8 max-w-lg w-full mx-4 shadow-2xl border-4 border-yellow-400">
+            <h3 className="text-2xl font-bold text-center mb-6 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+              📷 Update Profile Picture 📷
+            </h3>
+            
+            {/* Preview */}
+            {(capturedImage || profilePicture) && (
+              <div className="mb-6 text-center">
+                <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg">
+                  <img 
+                    src={capturedImage || profilePicture} 
+                    alt="Preview" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-sm text-gray-600 mt-2">Preview</p>
+              </div>
+            )}
+
+            <div className="space-y-4">
+              {/* Camera Capture */}
+              <div className="text-center">
+                <label className="block text-sm font-bold text-orange-700 mb-3">
+                  📸 Take Photo or Upload Image:
+                </label>
+                <div className="flex flex-col gap-3">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                    id="camera-input"
+                  />
+                  <label
+                    htmlFor="camera-input"
+                    className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 px-6 rounded-lg font-bold hover:from-orange-600 hover:to-red-600 transition cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    📷 Take Photo / Upload Image
+                  </label>
+                </div>
+              </div>
+
+              {/* Alternative URL Input */}
+              <div>
+                <label className="block text-sm font-bold text-orange-700 mb-2">
+                  🔗 Or Enter Image URL:
+                </label>
+                <input
+                  type="url"
+                  value={profilePicture}
+                  onChange={(e) => setProfilePicture(e.target.value)}
+                  placeholder="Enter image URL (optional)"
+                  className="w-full p-3 border-2 border-yellow-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                />
+              </div>
+
+              <div className="flex gap-4">
+                <button
+                  onClick={handleProfilePictureUpdate}
+                  className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-4 rounded-lg font-bold hover:from-green-600 hover:to-green-700 transition"
+                >
+                  💾 Save Picture
+                </button>
+                <button
+                  onClick={() => {
+                    setShowProfileModal(false);
+                    setCapturedImage(null);
+                    setProfilePicture("");
+                  }}
+                  className="flex-1 bg-gray-500 text-white py-3 px-4 rounded-lg font-bold hover:bg-gray-600 transition"
+                >
+                  ❌ Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
