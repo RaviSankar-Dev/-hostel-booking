@@ -105,12 +105,20 @@ function Dashboard() {
   if (!student) return <p className="text-center mt-10">Loading...</p>;
 
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-6">
-      <h1 className="text-3xl font-bold mb-6">Welcome, {student.name}</h1>
+    <div className="max-w-5xl mx-auto p-6 space-y-6 bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 min-h-screen">
+      {/* Diwali Header */}
+      <div className="w-full text-center py-3 bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white rounded-xl shadow-lg mb-6">
+        <h2 className="text-xl font-bold">🎆 Happy Diwali! 🪔</h2>
+        <p className="text-sm">May this festival of lights bring joy to your stay</p>
+      </div>
+      
+      <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent text-center">
+        🏠 Welcome, {student.name} 🏠
+      </h1>
 
       {/* Profile Section */}
-      <section className="mb-6 p-6 bg-white rounded-xl shadow space-y-2">
-        <h2 className="text-2xl font-semibold mb-4">Profile</h2>
+      <section className="mb-6 p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300 space-y-2">
+        <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">👤 Profile 👤</h2>
         <p><strong>Email:</strong> {student.email}</p>
         <p><strong>Full Name:</strong> {student.name}</p>
         <p><strong>City/Village:</strong> {student.city}</p>
@@ -121,13 +129,13 @@ function Dashboard() {
       </section>
 
       {/* Food Menu Accordion */}
-      <section className="mb-6 bg-white rounded-xl shadow">
+      <section className="mb-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300">
         <button
           onClick={() => setFoodOpen(!foodOpen)}
           className="w-full flex items-center justify-between p-6"
         >
-          <h2 className="text-2xl font-semibold">Food Menu</h2>
-          {foodOpen ? <ChevronUp /> : <ChevronDown />}
+          <h2 className="text-2xl font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">🍛 Food Menu 🍛</h2>
+          {foodOpen ? <ChevronUp className="text-orange-600" /> : <ChevronDown className="text-orange-600" />}
         </button>
         {foodOpen && (
           <div className="px-6 pb-6 space-y-3">
@@ -146,13 +154,13 @@ function Dashboard() {
       </section>
 
       {/* Facilities Accordion */}
-      <section className="mb-6 bg-white rounded-xl shadow">
+      <section className="mb-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300">
         <button
           onClick={() => setFacilitiesOpen(!facilitiesOpen)}
           className="w-full flex items-center justify-between p-6"
         >
-          <h2 className="text-2xl font-semibold">Facilities</h2>
-          {facilitiesOpen ? <ChevronUp /> : <ChevronDown />}
+          <h2 className="text-2xl font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">🏠 Facilities 🏠</h2>
+          {facilitiesOpen ? <ChevronUp className="text-orange-600" /> : <ChevronDown className="text-orange-600" />}
         </button>
         {facilitiesOpen && (
           <div className="px-6 pb-6">
@@ -164,12 +172,12 @@ function Dashboard() {
       </section>
 
       {/* Complaints Section */}
-      <section className="mb-6 p-6 bg-white rounded-xl shadow">
+      <section className="mb-6 p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-semibold">Complaints</h2>
+          <h2 className="text-2xl font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">📝 Complaints 📝</h2>
           {!complaintEnabled && (
-            <span className="text-red-600 font-medium">
-              Complaint box disabled by Admin
+            <span className="text-red-600 font-medium bg-red-100 px-3 py-1 rounded-full">
+              🚫 Complaint box disabled by Admin
             </span>
           )}
         </div>
@@ -201,9 +209,9 @@ function Dashboard() {
             </div>
             <button
               type="submit"
-              className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-orange-500 to-red-600 text-white py-2 rounded-lg"
+              className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-orange-500 to-red-600 text-white py-2 rounded-lg font-bold"
             >
-              <Send className="w-5 h-5" /> Submit Complaint
+              <Send className="w-5 h-5" /> 📝 Submit Complaint
             </button>
           </form>
         )}
@@ -234,8 +242,8 @@ function Dashboard() {
       </section>
 
       {/* Payment Status */}
-      <section className="mb-6 p-6 bg-white rounded-xl shadow">
-        <h2 className="text-2xl font-semibold mb-4">Payment Status</h2>
+      <section className="mb-6 p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300">
+        <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">💳 Payment Status 💳</h2>
         <ul className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {months.map((m) => {
             const status = student.payments?.[m] || "Pending";
@@ -253,6 +261,9 @@ function Dashboard() {
             );
           })}
         </ul>
+        <div className="text-center mt-6">
+          <p className="text-lg font-bold text-orange-600">🪔 Happy Diwali! May your stay be filled with light and joy! 🪔</p>
+        </div>
       </section>
     </div>
   );

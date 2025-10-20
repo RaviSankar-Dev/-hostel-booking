@@ -104,84 +104,85 @@ function AdminDashboard() {
   if (loading) return <Loader />;
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50">
       {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-indigo-700 to-purple-700 text-white p-6 hidden md:flex flex-col">
-        <h2 className="text-2xl font-bold mb-6">Admin Panel</h2>
+      <aside className="w-64 bg-gradient-to-b from-orange-600 via-yellow-500 to-red-600 text-white p-6 hidden md:flex flex-col">
+        <h2 className="text-2xl font-bold mb-6">🎆 Admin Panel 🪔</h2>
         <nav className="flex flex-col space-y-3">
           <button
             onClick={() => setActiveTab("students")}
             className={`flex items-center space-x-2 p-2 rounded ${
-              activeTab === "students" ? "bg-indigo-600" : "hover:bg-indigo-500"
+              activeTab === "students" ? "bg-yellow-600" : "hover:bg-yellow-500"
             }`}
           >
-            <Users size={18} /> <span>Students</span>
+            <Users size={18} /> <span>👥 Students</span>
           </button>
           <button
             onClick={() => setActiveTab("food")}
             className={`flex items-center space-x-2 p-2 rounded ${
-              activeTab === "food" ? "bg-indigo-600" : "hover:bg-indigo-500"
+              activeTab === "food" ? "bg-yellow-600" : "hover:bg-yellow-500"
             }`}
           >
-            <Utensils size={18} /> <span>Food Menu</span>
+            <Utensils size={18} /> <span>🍛 Food Menu</span>
           </button>
           <button
             onClick={() => setActiveTab("facilities")}
             className={`flex items-center space-x-2 p-2 rounded ${
-              activeTab === "facilities" ? "bg-indigo-600" : "hover:bg-indigo-500"
+              activeTab === "facilities" ? "bg-yellow-600" : "hover:bg-yellow-500"
             }`}
           >
-            <Settings size={18} /> <span>Facilities</span>
+            <Settings size={18} /> <span>🏠 Facilities</span>
           </button>
           <button
             onClick={() => setActiveTab("complaints")}
             className={`flex items-center space-x-2 p-2 rounded ${
-              activeTab === "complaints" ? "bg-indigo-600" : "hover:bg-indigo-500"
+              activeTab === "complaints" ? "bg-yellow-600" : "hover:bg-yellow-500"
             }`}
           >
-            <AlertCircle size={18} /> <span>Complaints</span>
+            <AlertCircle size={18} /> <span>📝 Complaints</span>
           </button>
         </nav>
         <button
           onClick={handleLogout}
-          className="mt-auto flex items-center space-x-2 bg-red-500 px-3 py-2 rounded hover:bg-red-600"
+          className="mt-auto flex items-center space-x-2 bg-red-500 px-3 py-2 rounded hover:bg-red-600 font-bold"
         >
-          <LogOut size={18} /> <span>Logout</span>
+          <LogOut size={18} /> <span>🚪 Logout</span>
         </button>
       </aside>
 
       {/* Main Content */}
       <main className="flex-1 p-6 space-y-6">
-        <div className="rounded-2xl p-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow">
-          <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-          <p className="text-sm text-indigo-100 mt-1">Manage students, food menu, facilities, and complaints</p>
+        <div className="rounded-2xl p-6 bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white shadow">
+          <h1 className="text-3xl font-bold">🎆 Admin Dashboard 🪔</h1>
+          <p className="text-sm text-yellow-100 mt-1">Manage students, food menu, facilities, and complaints</p>
+          <p className="text-xs text-yellow-200 mt-1">✨ Happy Diwali! May your management be filled with light and joy! ✨</p>
         </div>
 
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="rounded-xl bg-white shadow p-5 flex items-center justify-between">
+          <div className="rounded-xl bg-gradient-to-br from-yellow-50 to-orange-50 shadow-lg p-5 flex items-center justify-between border-2 border-yellow-300">
             <div>
-              <p className="text-sm text-gray-500">Total Students</p>
-              <p className="text-2xl font-semibold text-gray-800">{students.length}</p>
+              <p className="text-sm text-orange-600 font-medium">👥 Total Students</p>
+              <p className="text-2xl font-bold text-orange-800">{students.length}</p>
             </div>
-            <div className="h-12 w-12 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 text-white flex items-center justify-center">
               <Users size={22} />
             </div>
           </div>
-          <div className="rounded-xl bg-white shadow p-5 flex items-center justify-between">
+          <div className="rounded-xl bg-gradient-to-br from-red-50 to-orange-50 shadow-lg p-5 flex items-center justify-between border-2 border-red-300">
             <div>
-              <p className="text-sm text-gray-500">Complaints (Total)</p>
-              <p className="text-2xl font-semibold text-gray-800">{totalComplaints}</p>
+              <p className="text-sm text-red-600 font-medium">📝 Complaints (Total)</p>
+              <p className="text-2xl font-bold text-red-800">{totalComplaints}</p>
             </div>
-            <div className="h-12 w-12 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-red-400 to-orange-500 text-white flex items-center justify-center">
               <AlertCircle size={22} />
             </div>
           </div>
-          <div className="rounded-xl bg-white shadow p-5 flex items-center justify-between">
+          <div className="rounded-xl bg-gradient-to-br from-green-50 to-yellow-50 shadow-lg p-5 flex items-center justify-between border-2 border-green-300">
             <div>
-              <p className="text-sm text-gray-500">Complaints (Enabled)</p>
-              <p className="text-2xl font-semibold text-gray-800">{enabledComplaints}</p>
+              <p className="text-sm text-green-600 font-medium">✅ Complaints (Enabled)</p>
+              <p className="text-2xl font-bold text-green-800">{enabledComplaints}</p>
             </div>
-            <div className="h-12 w-12 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-green-400 to-yellow-500 text-white flex items-center justify-center">
               <AlertCircle size={22} />
             </div>
           </div>
@@ -189,8 +190,8 @@ function AdminDashboard() {
 
         {/* Students */}
         {activeTab === "students" && (
-          <section className="bg-white p-5 rounded-xl shadow">
-            <h2 className="text-2xl font-semibold mb-4">Students</h2>
+          <section className="bg-gradient-to-br from-yellow-50 to-orange-50 p-5 rounded-xl shadow-lg border-2 border-yellow-300">
+            <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">👥 Students 👥</h2>
             {students.length === 0 ? (
               <p className="text-gray-500">No students added yet.</p>
             ) : (
@@ -222,8 +223,8 @@ function AdminDashboard() {
 
         {/* Food Menu */}
         {activeTab === "food" && (
-          <section className="bg-white p-5 rounded-xl shadow space-y-4">
-            <h2 className="text-2xl font-semibold mb-2">Weekly Food Menu</h2>
+          <section className="bg-gradient-to-br from-yellow-50 to-orange-50 p-5 rounded-xl shadow-lg border-2 border-yellow-300 space-y-4">
+            <h2 className="text-2xl font-semibold mb-2 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">🍛 Weekly Food Menu 🍛</h2>
             {days.map((day) => (
               <div key={day} className="border rounded p-3 bg-gray-50">
                 <h3 className="font-semibold mb-2">{day}</h3>
@@ -248,12 +249,12 @@ function AdminDashboard() {
 
         {/* Facilities */}
         {activeTab === "facilities" && (
-          <section className="bg-white p-5 rounded-xl shadow space-y-3">
-            <h2 className="text-2xl font-semibold mb-2">Facilities</h2>
+          <section className="bg-gradient-to-br from-yellow-50 to-orange-50 p-5 rounded-xl shadow-lg border-2 border-yellow-300 space-y-3">
+            <h2 className="text-2xl font-semibold mb-2 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">🏠 Facilities 🏠</h2>
             <ul className="list-disc pl-6 space-y-1">
               {facilities.map((f, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <span className="inline-block px-2 py-0.5 rounded-full text-xs bg-indigo-100 text-indigo-700">{i + 1}</span>
+                  <span className="inline-block px-2 py-0.5 rounded-full text-xs bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-bold">{i + 1}</span>
                   {f}
                 </li>
               ))}
@@ -268,9 +269,9 @@ function AdminDashboard() {
               />
               <button
                 onClick={addFacility}
-                className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
+                className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-red-600 transition font-bold"
               >
-                Add
+                ➕ Add
               </button>
             </div>
           </section>
@@ -278,15 +279,15 @@ function AdminDashboard() {
 
         {/* Complaints */}
         {activeTab === "complaints" && (
-          <section className="bg-white p-5 rounded-xl shadow space-y-4">
-            <h2 className="text-2xl font-semibold">Complaints</h2>
+          <section className="bg-gradient-to-br from-yellow-50 to-orange-50 p-5 rounded-xl shadow-lg border-2 border-yellow-300 space-y-4">
+            <h2 className="text-2xl font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">📝 Complaints 📝</h2>
 
             {/* Global Toggle Card */}
-            <div className="rounded-lg border p-4 bg-gradient-to-r from-indigo-50 to-purple-50">
+            <div className="rounded-lg border-2 border-yellow-400 p-4 bg-gradient-to-r from-yellow-50 to-orange-50">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-gray-800">Complaint Box Visibility</p>
-                  <p className="text-sm text-gray-600">Control whether students can submit new complaints in their dashboard.</p>
+                  <p className="font-semibold text-orange-800">🪔 Complaint Box Visibility</p>
+                  <p className="text-sm text-orange-600">Control whether students can submit new complaints in their dashboard.</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer select-none">
                   <input
@@ -295,7 +296,7 @@ function AdminDashboard() {
                     checked={!!complaintEnabled}
                     onChange={(e) => toggleComplaintEnabled(e.target.checked)}
                   />
-                  <div className="w-14 h-8 bg-gray-300 rounded-full peer peer-checked:bg-indigo-600 transition-colors"></div>
+                  <div className="w-14 h-8 bg-gray-300 rounded-full peer peer-checked:bg-orange-600 transition-colors"></div>
                   <div className="absolute left-1 top-1 h-6 w-6 bg-white rounded-full shadow transition-transform peer-checked:translate-x-6" />
                 </label>
               </div>
@@ -381,9 +382,9 @@ function AdminDashboard() {
                                 JSON.stringify(updatedComplaints)
                               );
                             }}
-                            className="bg-indigo-600 text-white px-3 py-2 rounded-lg hover:bg-indigo-700"
+                            className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-2 rounded-lg hover:from-orange-600 hover:to-red-600 font-bold"
                           >
-                            Resolve
+                            🪔 Resolve
                           </button>
                         </div>
                       )}

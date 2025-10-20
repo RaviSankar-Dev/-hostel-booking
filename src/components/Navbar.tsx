@@ -24,14 +24,14 @@ function Navbar() {
   ];
 
   return (
-    <nav className="bg-gradient-to-r from-blue-600 to-purple-600 text-white sticky top-0 z-50 shadow-md">
+    <nav className="bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white sticky top-0 z-50 shadow-lg border-b-4 border-yellow-400">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <h1
-          className="font-bold text-2xl tracking-wide cursor-pointer"
+          className="font-bold text-2xl tracking-wide cursor-pointer hover:text-yellow-200 transition-colors"
           onClick={() => navigate("/")}
         >
-          Ravi PG
+          🏠 Gayatri Ladies Hostel 🪔
         </h1>
 
         {/* Desktop Links */}
@@ -42,9 +42,12 @@ function Navbar() {
               <Link
                 key={link.name}
                 to={link.path}
-                className="hover:text-yellow-300 transition-colors duration-300 font-medium"
+                className="hover:text-yellow-200 transition-colors duration-300 font-medium hover:bg-yellow-500/20 px-3 py-1 rounded-lg"
               >
-                {link.name}
+                {link.name === "Home" ? "🏠 Home" : 
+                 link.name === "Rooms" ? "🏠 Rooms" :
+                 link.name === "Facilities" ? "🏠 Facilities" :
+                 link.name === "Food Menu" ? "🍛 Food Menu" : link.name}
               </Link>
             ))}
 
@@ -52,15 +55,15 @@ function Navbar() {
             <>
               <Link
                 to="/dashboard"
-                className="bg-white text-blue-600 px-4 py-1 rounded-md hover:bg-gray-200 transition font-medium"
+                className="bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-lg hover:from-yellow-200 hover:to-orange-200 transition font-bold border-2 border-yellow-400"
               >
-                Student Dashboard
+                📊 Student Dashboard
               </Link>
               <button
                 onClick={handleLogout}
-                className="bg-red-500 px-4 py-1 rounded-md hover:bg-red-600 transition font-medium"
+                className="bg-gradient-to-r from-red-500 to-red-600 px-4 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition font-bold"
               >
-                Logout
+                🚪 Logout
               </button>
             </>
           )}
@@ -69,15 +72,15 @@ function Navbar() {
             <>
               <Link
                 to="/admin"
-                className="bg-white text-blue-600 px-4 py-1 rounded-md hover:bg-gray-200 transition font-medium"
+                className="bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-lg hover:from-yellow-200 hover:to-orange-200 transition font-bold border-2 border-yellow-400"
               >
-                Admin Dashboard
+                🎆 Admin Dashboard
               </Link>
               <button
                 onClick={handleLogout}
-                className="bg-red-500 px-4 py-1 rounded-md hover:bg-red-600 transition font-medium"
+                className="bg-gradient-to-r from-red-500 to-red-600 px-4 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition font-bold"
               >
-                Logout
+                🚪 Logout
               </button>
             </>
           )}
@@ -85,9 +88,9 @@ function Navbar() {
           {!currentUser && !currentAdmin && (
             <Link
               to="/auth"
-              className="bg-white text-blue-600 px-4 py-1 rounded-md hover:bg-gray-200 transition font-medium"
+              className="bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-lg hover:from-yellow-200 hover:to-orange-200 transition font-bold border-2 border-yellow-400"
             >
-              Login / Register
+              🔑 Login / Register
             </Link>
           )}
         </div>
@@ -102,16 +105,19 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-blue-700 px-6 py-4 space-y-4 flex flex-col">
+        <div className="md:hidden bg-gradient-to-r from-orange-700 via-yellow-600 to-red-700 px-6 py-4 space-y-4 flex flex-col">
           {!currentUser && !currentAdmin &&
             commonLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className="hover:text-yellow-300 transition-colors duration-300 font-medium"
+                className="hover:text-yellow-200 transition-colors duration-300 font-medium hover:bg-yellow-500/20 px-3 py-1 rounded-lg"
               >
-                {link.name}
+                {link.name === "Home" ? "🏠 Home" : 
+                 link.name === "Rooms" ? "🏠 Rooms" :
+                 link.name === "Facilities" ? "🏠 Facilities" :
+                 link.name === "Food Menu" ? "🍛 Food Menu" : link.name}
               </Link>
             ))}
 
@@ -120,15 +126,15 @@ function Navbar() {
               <Link
                 to="/dashboard"
                 onClick={() => setIsOpen(false)}
-                className="bg-white text-blue-600 px-4 py-1 rounded-md hover:bg-gray-200 transition font-medium"
+                className="bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-lg hover:from-yellow-200 hover:to-orange-200 transition font-bold border-2 border-yellow-400"
               >
-                Student Dashboard
+                📊 Student Dashboard
               </Link>
               <button
                 onClick={handleLogout}
-                className="bg-red-500 px-4 py-1 rounded-md hover:bg-red-600 transition font-medium"
+                className="bg-gradient-to-r from-red-500 to-red-600 px-4 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition font-bold"
               >
-                Logout
+                🚪 Logout
               </button>
             </>
           )}
@@ -138,15 +144,15 @@ function Navbar() {
               <Link
                 to="/admin"
                 onClick={() => setIsOpen(false)}
-                className="bg-white text-blue-600 px-4 py-1 rounded-md hover:bg-gray-200 transition font-medium"
+                className="bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-lg hover:from-yellow-200 hover:to-orange-200 transition font-bold border-2 border-yellow-400"
               >
-                Admin Dashboard
+                🎆 Admin Dashboard
               </Link>
               <button
                 onClick={handleLogout}
-                className="bg-red-500 px-4 py-1 rounded-md hover:bg-red-600 transition font-medium"
+                className="bg-gradient-to-r from-red-500 to-red-600 px-4 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition font-bold"
               >
-                Logout
+                🚪 Logout
               </button>
             </>
           )}
@@ -155,9 +161,9 @@ function Navbar() {
             <Link
               to="/auth"
               onClick={() => setIsOpen(false)}
-              className="bg-white text-blue-600 px-4 py-1 rounded-md hover:bg-gray-200 transition font-medium"
+              className="bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-lg hover:from-yellow-200 hover:to-orange-200 transition font-bold border-2 border-yellow-400"
             >
-              Login / Register
+              🔑 Login / Register
             </Link>
           )}
         </div>
