@@ -1,0 +1,11 @@
+@import "tailwindcss";
+/* 👇 Tailwind-style global overrides */
+@layer base {
+  body {
+    cursor: url("/cursors/trident.cur"), auto;
+  }
+
+  .dashboard-cursor {
+    cursor: url("/cursors/fairy.cur"), auto;
+  }
+}
