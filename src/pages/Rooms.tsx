@@ -35,7 +35,34 @@ function Rooms() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 min-h-screen">
+    <div className="max-w-7xl mx-auto p-6 bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 min-h-screen relative">
+      {/* Left Side Firecrackers */}
+      <div className="fixed left-4 top-1/4 z-10 hidden lg:block">
+        <div className="text-4xl animate-bounce">🧨</div>
+        <div className="text-3xl animate-pulse mt-2">💥</div>
+        <div className="text-2xl animate-bounce mt-3">🎆</div>
+        <div className="text-3xl animate-pulse mt-2">✨</div>
+        <div className="text-2xl animate-bounce mt-3">🎇</div>
+      </div>
+
+      {/* Right Side Firecrackers */}
+      <div className="fixed right-4 top-1/4 z-10 hidden lg:block">
+        <div className="text-4xl animate-bounce">🧨</div>
+        <div className="text-3xl animate-pulse mt-2">💥</div>
+        <div className="text-2xl animate-bounce mt-3">🎆</div>
+        <div className="text-3xl animate-pulse mt-2">✨</div>
+        <div className="text-2xl animate-bounce mt-3">🎇</div>
+      </div>
+
+      {/* Mobile Firecrackers - Top */}
+      <div className="absolute top-2 left-2 z-10 lg:hidden">
+        <div className="text-2xl animate-bounce">🧨</div>
+        <div className="text-xl animate-pulse">💥</div>
+      </div>
+      <div className="absolute top-2 right-2 z-10 lg:hidden">
+        <div className="text-2xl animate-bounce">🎆</div>
+        <div className="text-xl animate-pulse">✨</div>
+      </div>
       {/* Diwali Header */}
       <div className="w-full text-center py-4 bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white rounded-xl shadow-lg mb-8">
         <h2 className="text-2xl md:text-3xl font-bold">🎆 Happy Diwali! 🪔</h2>

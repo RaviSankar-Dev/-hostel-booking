@@ -119,7 +119,34 @@ function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 flex items-center justify-center p-4 relative">
+      {/* Left Side Firecrackers */}
+      <div className="fixed left-4 top-1/4 z-10 hidden lg:block">
+        <div className="text-4xl animate-bounce">🧨</div>
+        <div className="text-3xl animate-pulse mt-2">💥</div>
+        <div className="text-2xl animate-bounce mt-3">🎆</div>
+        <div className="text-3xl animate-pulse mt-2">✨</div>
+        <div className="text-2xl animate-bounce mt-3">🎇</div>
+      </div>
+
+      {/* Right Side Firecrackers */}
+      <div className="fixed right-4 top-1/4 z-10 hidden lg:block">
+        <div className="text-4xl animate-bounce">🧨</div>
+        <div className="text-3xl animate-pulse mt-2">💥</div>
+        <div className="text-2xl animate-bounce mt-3">🎆</div>
+        <div className="text-3xl animate-pulse mt-2">✨</div>
+        <div className="text-2xl animate-bounce mt-3">🎇</div>
+      </div>
+
+      {/* Mobile Firecrackers - Top */}
+      <div className="absolute top-2 left-2 z-10 lg:hidden">
+        <div className="text-2xl animate-bounce">🧨</div>
+        <div className="text-xl animate-pulse">💥</div>
+      </div>
+      <div className="absolute top-2 right-2 z-10 lg:hidden">
+        <div className="text-2xl animate-bounce">🎆</div>
+        <div className="text-xl animate-pulse">✨</div>
+      </div>
       {/* Diwali Header */}
       <div className="absolute top-4 left-4 right-4 text-center py-2 bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white rounded-lg shadow-lg">
         <h2 className="text-lg font-bold">🎆 Happy Diwali! 🪔</h2>

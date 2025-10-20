@@ -104,7 +104,34 @@ function AdminDashboard() {
   if (loading) return <Loader />;
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50">
+    <div className="flex min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 relative">
+      {/* Left Side Firecrackers */}
+      <div className="fixed left-4 top-1/4 z-10 hidden lg:block">
+        <div className="text-4xl animate-bounce">🧨</div>
+        <div className="text-3xl animate-pulse mt-2">💥</div>
+        <div className="text-2xl animate-bounce mt-3">🎆</div>
+        <div className="text-3xl animate-pulse mt-2">✨</div>
+        <div className="text-2xl animate-bounce mt-3">🎇</div>
+      </div>
+
+      {/* Right Side Firecrackers */}
+      <div className="fixed right-4 top-1/4 z-10 hidden lg:block">
+        <div className="text-4xl animate-bounce">🧨</div>
+        <div className="text-3xl animate-pulse mt-2">💥</div>
+        <div className="text-2xl animate-bounce mt-3">🎆</div>
+        <div className="text-3xl animate-pulse mt-2">✨</div>
+        <div className="text-2xl animate-bounce mt-3">🎇</div>
+      </div>
+
+      {/* Mobile Firecrackers - Top */}
+      <div className="absolute top-2 left-2 z-10 lg:hidden">
+        <div className="text-2xl animate-bounce">🧨</div>
+        <div className="text-xl animate-pulse">💥</div>
+      </div>
+      <div className="absolute top-2 right-2 z-10 lg:hidden">
+        <div className="text-2xl animate-bounce">🎆</div>
+        <div className="text-xl animate-pulse">✨</div>
+      </div>
       {/* Sidebar */}
       <aside className="w-64 bg-gradient-to-b from-orange-600 via-yellow-500 to-red-600 text-white p-6 hidden md:flex flex-col">
         <h2 className="text-2xl font-bold mb-6">🎆 Admin Panel 🪔</h2>
