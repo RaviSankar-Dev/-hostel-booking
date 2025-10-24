@@ -133,9 +133,9 @@ function About() {
         </div>
       </div>
 
-      {/* Diwali Footer */}
-      <div className="text-center mt-12 p-6 bg-white rounded-xl" style={{border: '2px solid #FF7043'}}>
-        <p className="text-lg font-bold" style={{color: '#FF7043'}}>Welcome to your new home!</p>
+      {/* Footer */}
+      <div className="text-center mt-12 p-6 bg-white rounded-xl" style={{border: '2px solid #2563eb'}}>
+        <p className="text-lg font-bold" style={{color: '#2563eb'}}>Welcome to your new home!</p>
       </div>
     </div>
   );

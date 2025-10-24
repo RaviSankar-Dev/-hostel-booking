@@ -210,19 +210,19 @@ function Dashboard() {
       </section>
 
       {/* Food Menu Accordion */}
-      <section className="mb-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #F9A825'}}>
+      <section className="mb-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #2563eb'}}>
         <button
           onClick={() => setFoodOpen(!foodOpen)}
           className="w-full flex items-center justify-between p-6"
         >
-          <h2 className="text-2xl font-semibold" style={{color: '#2C3E50'}}>Food Menu</h2>
-          {foodOpen ? <ChevronUp style={{color: '#4CAF50'}} /> : <ChevronDown style={{color: '#4CAF50'}} />}
+          <h2 className="text-2xl font-semibold" style={{color: '#1e293b'}}>Food Menu</h2>
+          {foodOpen ? <ChevronUp style={{color: '#2563eb'}} /> : <ChevronDown style={{color: '#2563eb'}} />}
         </button>
         {foodOpen && (
           <div className="px-6 pb-6 space-y-3">
             {days.map(day => (
-              <div key={day} className="border rounded p-3 bg-gray-50">
-                <h3 className="font-semibold mb-2">{day}</h3>
+              <div key={day} className="border rounded p-3 bg-gray-50" style={{border: '1px solid #2563eb'}}>
+                <h3 className="font-semibold mb-2" style={{color: '#1e293b'}}>{day}</h3>
                 <ul className="list-disc pl-6 space-y-1">
                   <li><strong>Breakfast:</strong> {foodMenu[day]?.breakfast || "-"}</li>
                   <li><strong>Lunch:</strong> {foodMenu[day]?.lunch || "-"}</li>
@@ -235,27 +235,27 @@ function Dashboard() {
       </section>
 
       {/* Facilities Accordion */}
-      <section className="mb-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #F9A825'}}>
+      <section className="mb-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #2563eb'}}>
         <button
           onClick={() => setFacilitiesOpen(!facilitiesOpen)}
           className="w-full flex items-center justify-between p-6"
         >
-          <h2 className="text-2xl font-semibold" style={{color: '#2C3E50'}}>Facilities</h2>
-          {facilitiesOpen ? <ChevronUp style={{color: '#4CAF50'}} /> : <ChevronDown style={{color: '#4CAF50'}} />}
+          <h2 className="text-2xl font-semibold" style={{color: '#1e293b'}}>Facilities</h2>
+          {facilitiesOpen ? <ChevronUp style={{color: '#2563eb'}} /> : <ChevronDown style={{color: '#2563eb'}} />}
         </button>
         {facilitiesOpen && (
           <div className="px-6 pb-6">
             <ul className="list-disc pl-6 space-y-1">
-              {facilities.map((f, i) => <li key={i}>{f}</li>)}
+              {facilities.map((f, i) => <li key={i} style={{color: '#1e293b'}}>{f}</li>)}
             </ul>
           </div>
         )}
       </section>
 
       {/* Complaints Section */}
-      <section className="mb-6 p-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #FF7043'}}>
+      <section className="mb-6 p-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #2563eb'}}>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-semibold" style={{color: '#2C3E50'}}>Complaints</h2>
+          <h2 className="text-2xl font-semibold" style={{color: '#1e293b'}}>Complaints</h2>
           {!complaintEnabled && (
             <span className="text-red-600 font-medium bg-red-100 px-3 py-1 rounded-full">
               🚫 Complaint box disabled by Admin
@@ -268,7 +268,7 @@ function Dashboard() {
             <select
               value={newCategory}
               onChange={(e) => setNewCategory(e.target.value)}
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded" style={{borderColor: '#2563eb'}}
             >
               <option value="general">General</option>
               <option value="food">Food Quality</option>
@@ -283,17 +283,14 @@ function Dashboard() {
                 onChange={(e) => setNewComplaint(e.target.value)}
                 placeholder="Write your complaint..."
                 rows={3}
-                className="w-full border p-2 rounded pr-10"
+                className="w-full border p-2 rounded pr-10" style={{borderColor: '#2563eb'}}
                 required
               />
               <AlertCircle className="absolute right-3 top-3 text-gray-400 w-5 h-5" />
             </div>
             <button
               type="submit"
-              className="flex items-center justify-center gap-2 w-full text-white py-2 rounded-lg font-bold"
-              style={{backgroundColor: '#4CAF50'}}
-              onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#45a049'}
-              onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#4CAF50'}
+              className="flex items-center justify-center gap-2 w-full text-white py-2 rounded-lg font-bold bg-blue-600 hover:bg-blue-700 transition"
             >
               <Send className="w-5 h-5" /> Submit Complaint
             </button>
@@ -326,8 +323,8 @@ function Dashboard() {
       </section>
 
       {/* Payment Status */}
-      <section className="mb-6 p-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #4CAF50'}}>
-        <h2 className="text-2xl font-semibold mb-4" style={{color: '#2C3E50'}}>Payment Status</h2>
+      <section className="mb-6 p-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #2563eb'}}>
+        <h2 className="text-2xl font-semibold mb-4" style={{color: '#1e293b'}}>Payment Status</h2>
         <ul className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {months.map((m) => {
             const status = student.payments?.[m] || "Pending";
@@ -346,22 +343,22 @@ function Dashboard() {
           })}
         </ul>
         <div className="text-center mt-6">
-          <p className="text-lg font-bold" style={{color: '#FF7043'}}>Welcome to your new home!</p>
+          <p className="text-lg font-bold" style={{color: '#2563eb'}}>Welcome to your new home!</p>
         </div>
       </section>
 
       {/* Profile Picture Modal */}
       {showProfileModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-8 max-w-lg w-full mx-4 shadow-2xl border-4 border-yellow-300">
-            <h3 className="text-2xl font-bold text-center mb-6 text-yellow-800">
+          <div className="bg-white rounded-2xl p-8 max-w-lg w-full mx-4 shadow-2xl" style={{border: '4px solid #2563eb'}}>
+            <h3 className="text-2xl font-bold text-center mb-6" style={{color: '#1e293b'}}>
               Update Profile Picture
             </h3>
             
             {/* Preview */}
             {(capturedImage || profilePicture) && (
               <div className="mb-6 text-center">
-                <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg">
+                <div className="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg" style={{border: '4px solid #2563eb'}}>
                   <img 
                     src={capturedImage || profilePicture} 
                     alt="Preview" 
@@ -375,7 +372,7 @@ function Dashboard() {
             <div className="space-y-4">
               {/* Camera Capture */}
               <div className="text-center">
-                <label className="block text-sm font-bold text-yellow-700 mb-3">
+                <label className="block text-sm font-bold mb-3" style={{color: '#1e293b'}}>
                   Take Photo or Upload Image:
                 </label>
                 <div className="flex flex-col gap-3">
@@ -389,7 +386,7 @@ function Dashboard() {
                   />
                   <label
                     htmlFor="camera-input"
-                    className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-bold transition cursor-pointer flex items-center justify-center gap-2"
+                    className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-bold transition cursor-pointer flex items-center justify-center gap-2"
                   >
                     📷 Take Photo / Upload Image
                   </label>
@@ -398,7 +395,7 @@ function Dashboard() {
 
               {/* Alternative URL Input */}
               <div>
-                <label className="block text-sm font-bold text-yellow-700 mb-2">
+                <label className="block text-sm font-bold mb-2" style={{color: '#1e293b'}}>
                   Or Enter Image URL:
                 </label>
                 <input
@@ -406,14 +403,14 @@ function Dashboard() {
                   value={profilePicture}
                   onChange={(e) => setProfilePicture(e.target.value)}
                   placeholder="Enter image URL (optional)"
-                  className="w-full p-3 border-2 border-yellow-300 rounded-lg focus:border-yellow-500 focus:outline-none"
+                  className="w-full p-3 border-2 rounded-lg focus:outline-none" style={{borderColor: '#2563eb'}}
                 />
               </div>
 
               <div className="flex gap-4">
                 <button
                   onClick={handleProfilePictureUpdate}
-                  className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-4 rounded-lg font-bold hover:from-green-600 hover:to-green-700 transition"
+                  className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-lg font-bold hover:bg-blue-700 transition"
                 >
                   💾 Save Picture
                 </button>

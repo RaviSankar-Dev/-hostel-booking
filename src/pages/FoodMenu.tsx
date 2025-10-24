@@ -71,14 +71,14 @@ function FoodMenu() {
                 <strong className="text-white">🍴 Dinner:</strong> <span className="text-white">{dayMenu.items.dinner}</span>
               </p>
               <div className="mt-2 text-xs text-white font-bold">
-                ✨ Diwali Special Menu ✨
+                ✨ Weekly Menu ✨
               </div>
             </div>
           </div>
         ))}
       </div>
       
-      {/* Diwali Footer */}
+      {/* Footer */}
       <div className="text-center mt-12 p-6 bg-white rounded-xl" style={{border: '2px solid #2563eb'}}>
         <p className="text-lg font-bold" style={{color: '#2563eb'}}>Welcome to your new home!</p>
       </div>

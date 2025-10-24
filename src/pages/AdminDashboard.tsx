@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Users, Utensils, Settings, AlertCircle, LogOut } from "lucide-react";
+import { Users, Utensils, Settings, AlertCircle, LogOut, Edit, Trash2 } from "lucide-react";
 import Loader from "../components/Loader";
 
 interface Complaint {
@@ -40,8 +40,17 @@ function AdminDashboard() {
   const [expandedStudent, setExpandedStudent] = useState<number | null>(null);
   const [newFacility, setNewFacility] = useState("");
   const [complaintEnabled, setComplaintEnabled] = useState<boolean>(true);
+  const [editingFacility, setEditingFacility] = useState<number | null>(null);
+  const [editFacilityText, setEditFacilityText] = useState("");
 
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+  const cleanFoodItem = (item: string): string => {
+    if (!item || item.trim() === "" || item === "0" || item === "8" || item.length <= 1) {
+      return "";
+    }
+    return item.trim();
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -52,7 +61,24 @@ function AdminDashboard() {
         const defaultMenu: { [day: string]: FoodItem } = {};
         days.forEach((d) => (defaultMenu[d] = { breakfast: "", lunch: "", dinner: "" }));
         setFoodMenu(defaultMenu);
-      } else setFoodMenu(storedMenu);
+      } else {
+        // Clean up the stored menu automatically
+        const cleanedMenu: { [day: string]: FoodItem } = {};
+        days.forEach(day => {
+          if (storedMenu[day]) {
+            cleanedMenu[day] = {
+              breakfast: cleanFoodItem(storedMenu[day].breakfast || ""),
+              lunch: cleanFoodItem(storedMenu[day].lunch || ""),
+              dinner: cleanFoodItem(storedMenu[day].dinner || "")
+            };
+          } else {
+            cleanedMenu[day] = { breakfast: "", lunch: "", dinner: "" };
+          }
+        });
+        setFoodMenu(cleanedMenu);
+        // Update localStorage with cleaned data
+        localStorage.setItem("foodMenu", JSON.stringify(cleanedMenu));
+      }
 
       setFacilities(
         JSON.parse(
@@ -82,12 +108,63 @@ function AdminDashboard() {
     localStorage.setItem("foodMenu", JSON.stringify(updatedMenu));
   };
 
+  const cleanupFoodMenu = () => {
+    const cleanedMenu: { [day: string]: FoodItem } = {};
+    
+    // Only keep valid day entries and clean up unwanted values
+    days.forEach(day => {
+      if (foodMenu[day]) {
+        const cleanedDay: FoodItem = {
+          breakfast: cleanFoodItem(foodMenu[day].breakfast || ""),
+          lunch: cleanFoodItem(foodMenu[day].lunch || ""),
+          dinner: cleanFoodItem(foodMenu[day].dinner || "")
+        };
+        cleanedMenu[day] = cleanedDay;
+      } else {
+        // Initialize empty day if it doesn't exist
+        cleanedMenu[day] = { breakfast: "", lunch: "", dinner: "" };
+      }
+    });
+    
+    setFoodMenu(cleanedMenu);
+    localStorage.setItem("foodMenu", JSON.stringify(cleanedMenu));
+    alert("Food menu cleaned! Removed unwanted entries (0, 8, and unnamed items).");
+  };
+
   const addFacility = () => {
     if (!newFacility.trim()) return;
     const updatedFacilities = [...facilities, newFacility.trim()];
     setFacilities(updatedFacilities);
     localStorage.setItem("facilities", JSON.stringify(updatedFacilities));
     setNewFacility("");
+  };
+
+  const editFacility = (index: number) => {
+    setEditingFacility(index);
+    setEditFacilityText(facilities[index]);
+  };
+
+  const saveFacilityEdit = () => {
+    if (!editFacilityText.trim()) return;
+    const updatedFacilities = [...facilities];
+    updatedFacilities[editingFacility!] = editFacilityText.trim();
+    setFacilities(updatedFacilities);
+    localStorage.setItem("facilities", JSON.stringify(updatedFacilities));
+    setEditingFacility(null);
+    setEditFacilityText("");
+  };
+
+  const cancelFacilityEdit = () => {
+    setEditingFacility(null);
+    setEditFacilityText("");
+  };
+
+  const deleteFacility = (index: number) => {
+    if (window.confirm("Are you sure you want to delete this facility?")) {
+      const updatedFacilities = facilities.filter((_, i) => i !== index);
+      setFacilities(updatedFacilities);
+      localStorage.setItem("facilities", JSON.stringify(updatedFacilities));
+    }
   };
 
   const toggleComplaintEnabled = (checked: boolean) => {
@@ -222,55 +299,111 @@ function AdminDashboard() {
 
         {/* Food Menu */}
         {activeTab === "food" && (
-          <section className="bg-gradient-to-br from-yellow-50 to-orange-50 p-5 rounded-xl shadow-lg border-2 border-yellow-300 space-y-4">
-            <h2 className="text-2xl font-semibold mb-2 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">🍛 Weekly Food Menu 🍛</h2>
-            {days.map((day) => (
-              <div key={day} className="border rounded p-3 bg-gray-50">
-                <h3 className="font-semibold mb-2">{day}</h3>
-                {(["breakfast", "lunch", "dinner"] as (keyof FoodItem)[]).map(
-                  (meal) => (
-                    <div key={meal} className="flex items-center space-x-2 mb-2">
-                      <span className="capitalize w-24">{meal}:</span>
-                      <input
-                        type="text"
-                        className="border p-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                        value={foodMenu[day]?.[meal] || ""}
-                        onChange={(e) => updateFoodItem(day, meal, e.target.value)}
-                        placeholder={`Add ${meal}`}
-                      />
-                    </div>
-                  )
-                )}
-              </div>
-            ))}
+          <section className="bg-white p-6 rounded-xl shadow-lg" style={{border: '2px solid #2563eb'}}>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-semibold" style={{color: '#1e293b'}}>🍛 Weekly Food Menu</h2>
+              <button
+                onClick={cleanupFoodMenu}
+                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition font-semibold"
+              >
+                🧹 Clean Menu
+              </button>
+            </div>
+            <div className="space-y-4">
+              {days.map((day) => (
+                <div key={day} className="border rounded-lg p-4 bg-gray-50" style={{border: '1px solid #2563eb'}}>
+                  <h3 className="font-semibold mb-3 text-lg" style={{color: '#1e293b'}}>{day}</h3>
+                  {(["breakfast", "lunch", "dinner"] as (keyof FoodItem)[]).map(
+                    (meal) => (
+                      <div key={meal} className="flex items-center space-x-3 mb-3">
+                        <span className="capitalize w-24 font-medium" style={{color: '#64748b'}}>{meal}:</span>
+                        <input
+                          type="text"
+                          className="border p-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500" style={{borderColor: '#2563eb'}}
+                          value={foodMenu[day]?.[meal] || ""}
+                          onChange={(e) => updateFoodItem(day, meal, e.target.value)}
+                          placeholder={`Add ${meal}`}
+                        />
+                      </div>
+                    )
+                  )}
+                </div>
+              ))}
+            </div>
           </section>
         )}
 
         {/* Facilities */}
         {activeTab === "facilities" && (
-          <section className="bg-gradient-to-br from-yellow-50 to-orange-50 p-5 rounded-xl shadow-lg border-2 border-yellow-300 space-y-3">
-            <h2 className="text-2xl font-semibold mb-2 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">🏠 Facilities 🏠</h2>
-            <ul className="list-disc pl-6 space-y-1">
-              {facilities.map((f, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  <span className="inline-block px-2 py-0.5 rounded-full text-xs bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-bold">{i + 1}</span>
-                  {f}
-                </li>
+          <section className="bg-white p-6 rounded-xl shadow-lg" style={{border: '2px solid #2563eb'}}>
+            <h2 className="text-2xl font-semibold mb-4" style={{color: '#1e293b'}}>🏠 Facilities Management</h2>
+            <div className="space-y-3">
+              {facilities.map((facility, index) => (
+                <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg" style={{border: '1px solid #2563eb'}}>
+                  {editingFacility === index ? (
+                    <div className="flex items-center space-x-2 flex-1">
+                      <span className="inline-block px-2 py-1 rounded-full text-xs bg-blue-600 text-white font-bold">{index + 1}</span>
+                      <input
+                        type="text"
+                        value={editFacilityText}
+                        onChange={(e) => setEditFacilityText(e.target.value)}
+                        className="flex-1 border p-2 rounded" style={{borderColor: '#2563eb'}}
+                        autoFocus
+                      />
+                      <button
+                        onClick={saveFacilityEdit}
+                        className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={cancelFacilityEdit}
+                        className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600 transition"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-between flex-1">
+                      <div className="flex items-center space-x-2">
+                        <span className="inline-block px-2 py-1 rounded-full text-xs bg-blue-600 text-white font-bold">{index + 1}</span>
+                        <span className="text-gray-800">{facility}</span>
+                      </div>
+                      <div className="flex space-x-1">
+                        <button
+                          onClick={() => editFacility(index)}
+                          className="p-1 text-blue-600 hover:bg-blue-100 rounded transition"
+                          title="Edit facility"
+                        >
+                          <Edit size={16} />
+                        </button>
+                        <button
+                          onClick={() => deleteFacility(index)}
+                          className="p-1 text-red-600 hover:bg-red-100 rounded transition"
+                          title="Delete facility"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
-            </ul>
-            <div className="flex space-x-2 mt-2">
+            </div>
+            <div className="flex space-x-2 mt-4">
               <input
                 type="text"
                 placeholder="Add new facility"
                 value={newFacility}
                 onChange={(e) => setNewFacility(e.target.value)}
-                className="border p-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="border p-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500" style={{borderColor: '#2563eb'}}
+                onKeyPress={(e) => e.key === 'Enter' && addFacility()}
               />
               <button
                 onClick={addFacility}
-                className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-red-600 transition font-bold"
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition font-semibold"
               >
-                ➕ Add
+                ➕ Add Facility
               </button>
             </div>
           </section>
@@ -278,15 +411,15 @@ function AdminDashboard() {
 
         {/* Complaints */}
         {activeTab === "complaints" && (
-          <section className="bg-gradient-to-br from-yellow-50 to-orange-50 p-5 rounded-xl shadow-lg border-2 border-yellow-300 space-y-4">
-            <h2 className="text-2xl font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">📝 Complaints 📝</h2>
+          <section className="bg-white p-6 rounded-xl shadow-lg" style={{border: '2px solid #2563eb'}}>
+            <h2 className="text-2xl font-semibold mb-4" style={{color: '#1e293b'}}>📝 Complaints Management</h2>
 
             {/* Global Toggle Card */}
-            <div className="rounded-lg border-2 border-yellow-400 p-4 bg-gradient-to-r from-yellow-50 to-orange-50">
+            <div className="rounded-lg p-4 bg-gray-50" style={{border: '1px solid #2563eb'}}>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-orange-800">🪔 Complaint Box Visibility</p>
-                  <p className="text-sm text-orange-600">Control whether students can submit new complaints in their dashboard.</p>
+                  <p className="font-semibold" style={{color: '#1e293b'}}>📝 Complaint Box Visibility</p>
+                  <p className="text-sm" style={{color: '#64748b'}}>Control whether students can submit new complaints in their dashboard.</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer select-none">
                   <input
@@ -295,7 +428,7 @@ function AdminDashboard() {
                     checked={!!complaintEnabled}
                     onChange={(e) => toggleComplaintEnabled(e.target.checked)}
                   />
-                  <div className="w-14 h-8 bg-gray-300 rounded-full peer peer-checked:bg-orange-600 transition-colors"></div>
+                  <div className="w-14 h-8 bg-gray-300 rounded-full peer peer-checked:bg-blue-600 transition-colors"></div>
                   <div className="absolute left-1 top-1 h-6 w-6 bg-white rounded-full shadow transition-transform peer-checked:translate-x-6" />
                 </label>
               </div>
@@ -311,87 +444,89 @@ function AdminDashboard() {
                 )}
               </div>
             </div>
-            {Object.keys(complaints).length === 0 ? (
-              <p className="text-gray-500">No complaints submitted.</p>
-            ) : (
-              Object.entries(complaints).map(([email, list]) => (
-                <div key={email} className="border p-4 rounded-xl bg-gray-50 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <p className="font-semibold">{email}</p>
-                    <span className="text-xs text-gray-500">{list.length} item(s)</span>
-                  </div>
-                  {list.map((c, i) => (
-                    <div key={i} className="p-4 border rounded-lg bg-white space-y-2">
-                      {/* Complaint + Enable/Disable */}
-                      <div className="flex justify-between items-start gap-4">
-                        <div className="space-y-1">
-                          <p className="text-sm text-gray-500">Category</p>
-                          <p className="font-medium"><strong>{c.category}:</strong> {c.message}</p>
-                          {c.resolved && (
-                            <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">Resolved</span>
-                          )}
-                        </div>
-                        <label className="flex items-center space-x-2 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={c.enabled !== false}
-                            onChange={(e) => {
-                              const updatedComplaints = { ...complaints };
-                              updatedComplaints[email] = updatedComplaints[email].map(
-                                (comp, idx) =>
-                                  idx === i ? { ...comp, enabled: e.target.checked } : comp
-                              );
-                              setComplaints(updatedComplaints);
-                              localStorage.setItem(
-                                "complaints",
-                                JSON.stringify(updatedComplaints)
-                              );
-                            }}
-                            className="h-4 w-4 text-indigo-600"
-                          />
-                          <span className="text-sm">
-                            {c.enabled !== false ? "Enabled" : "Disabled"}
-                          </span>
-                        </label>
-                      </div>
-
-                      {/* Reply + Resolve */}
-                      {c.reply ? (
-                        <p className="text-green-600">✅ Reply: {c.reply}</p>
-                      ) : (
-                        <div className="flex space-x-2">
-                          <input
-                            type="text"
-                            placeholder="Type reply..."
-                            className="border p-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            onChange={(e) => (c.reply = e.target.value)}
-                          />
-                          <button
-                            onClick={() => {
-                              if (!c.reply || c.reply.trim() === "") return;
-                              const updatedComplaints = { ...complaints };
-                              updatedComplaints[email][i] = {
-                                ...updatedComplaints[email][i],
-                                reply: c.reply,
-                                resolved: true,
-                              };
-                              setComplaints(updatedComplaints);
-                              localStorage.setItem(
-                                "complaints",
-                                JSON.stringify(updatedComplaints)
-                              );
-                            }}
-                            className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-2 rounded-lg hover:from-orange-600 hover:to-red-600 font-bold"
-                          >
-                            🪔 Resolve
-                          </button>
-                        </div>
-                      )}
+            <div className="mt-6">
+              {Object.keys(complaints).length === 0 ? (
+                <p className="text-gray-500 text-center py-8">No complaints submitted.</p>
+              ) : (
+                Object.entries(complaints).map(([email, list]) => (
+                  <div key={email} className="border p-4 rounded-xl bg-gray-50 space-y-3 mb-4" style={{border: '1px solid #2563eb'}}>
+                    <div className="flex items-center justify-between">
+                      <p className="font-semibold" style={{color: '#1e293b'}}>{email}</p>
+                      <span className="text-xs" style={{color: '#64748b'}}>{list.length} item(s)</span>
                     </div>
-                  ))}
-                </div>
-              ))
-            )}
+                    {list.map((c, i) => (
+                      <div key={i} className="p-4 border rounded-lg bg-white space-y-2" style={{border: '1px solid #2563eb'}}>
+                        {/* Complaint + Enable/Disable */}
+                        <div className="flex justify-between items-start gap-4">
+                          <div className="space-y-1">
+                            <p className="text-sm" style={{color: '#64748b'}}>Category</p>
+                            <p className="font-medium" style={{color: '#1e293b'}}><strong>{c.category}:</strong> {c.message}</p>
+                            {c.resolved && (
+                              <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">Resolved</span>
+                            )}
+                          </div>
+                          <label className="flex items-center space-x-2 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={c.enabled !== false}
+                              onChange={(e) => {
+                                const updatedComplaints = { ...complaints };
+                                updatedComplaints[email] = updatedComplaints[email].map(
+                                  (comp, idx) =>
+                                    idx === i ? { ...comp, enabled: e.target.checked } : comp
+                                );
+                                setComplaints(updatedComplaints);
+                                localStorage.setItem(
+                                  "complaints",
+                                  JSON.stringify(updatedComplaints)
+                                );
+                              }}
+                              className="h-4 w-4 text-blue-600"
+                            />
+                            <span className="text-sm" style={{color: '#64748b'}}>
+                              {c.enabled !== false ? "Enabled" : "Disabled"}
+                            </span>
+                          </label>
+                        </div>
+
+                        {/* Reply + Resolve */}
+                        {c.reply ? (
+                          <p className="text-green-600">✅ Reply: {c.reply}</p>
+                        ) : (
+                          <div className="flex space-x-2">
+                            <input
+                              type="text"
+                              placeholder="Type reply..."
+                              className="border p-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500" style={{borderColor: '#2563eb'}}
+                              onChange={(e) => (c.reply = e.target.value)}
+                            />
+                            <button
+                              onClick={() => {
+                                if (!c.reply || c.reply.trim() === "") return;
+                                const updatedComplaints = { ...complaints };
+                                updatedComplaints[email][i] = {
+                                  ...updatedComplaints[email][i],
+                                  reply: c.reply,
+                                  resolved: true,
+                                };
+                                setComplaints(updatedComplaints);
+                                localStorage.setItem(
+                                  "complaints",
+                                  JSON.stringify(updatedComplaints)
+                                );
+                              }}
+                              className="bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 font-semibold transition"
+                            >
+                              📝 Resolve
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ))
+              )}
+            </div>
           </section>
         )}
       </main>

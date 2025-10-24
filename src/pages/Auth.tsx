@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 interface Student {
   email: string;
@@ -33,6 +34,7 @@ function Auth() {
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
   const [generatedOtp, setGeneratedOtp] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("students") || "[]");
@@ -235,15 +237,24 @@ function Auth() {
           className="w-full border p-2 rounded"
           required
         />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            className="w-full border p-2 rounded pr-10" style={{borderColor: '#2563eb'}}
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
+        </div>
           {isLogin && (
             <div className="text-right -mt-2">
               <button
@@ -303,14 +314,23 @@ function Auth() {
                 className="w-full border p-2 rounded text-center text-lg tracking-widest"
                 required
               />
-              <input
-                type="password"
-                placeholder="New Password"
-                value={resetPassword}
-                onChange={(e) => setResetPassword(e.target.value)}
-                className="w-full border p-2 rounded" style={{borderColor: '#2563eb'}}
-                required
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="New Password"
+                  value={resetPassword}
+                  onChange={(e) => setResetPassword(e.target.value)}
+                  className="w-full border p-2 rounded pr-10" style={{borderColor: '#2563eb'}}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
               <div className="flex items-center justify-between">
                 <button
                   type="button"
