@@ -133,43 +133,13 @@ function Auth() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 flex items-center justify-center p-4 relative">
-      {/* Left Side Firecrackers */}
-      <div className="fixed left-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
+    <div className="min-h-screen bg-white flex items-center justify-center p-4 relative">
 
-      {/* Right Side Firecrackers */}
-      <div className="fixed right-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Mobile Firecrackers - Top */}
-      <div className="absolute top-2 left-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🧨</div>
-        <div className="text-xl animate-pulse">💥</div>
-      </div>
-      <div className="absolute top-2 right-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🎆</div>
-        <div className="text-xl animate-pulse">✨</div>
-      </div>
-      {/* Diwali Header */}
-      <div className="absolute top-4 left-4 right-4 text-center py-2 bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white rounded-lg shadow-lg">
-        <h2 className="text-lg font-bold">🎆 Happy Diwali! 🪔</h2>
-      </div>
       
 
-      <div className="max-w-md w-full p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300 mt-16">
-        <h1 className="text-2xl font-bold mb-4 text-center bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-          {showForgot ? "🪔 Reset Password 🪔" : isLogin ? "🔑 Login 🔑" : "📝 Register 📝"}
+      <div className="max-w-md w-full p-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #2563eb'}}>
+        <h1 className="text-2xl font-bold mb-4 text-center" style={{color: '#1e293b'}}>
+          {showForgot ? "Reset Password" : isLogin ? "Login" : "Register"}
         </h1>
         
       {!showForgot && (
@@ -182,7 +152,7 @@ function Auth() {
               placeholder="Full Name"
               value={form.name}
               onChange={handleChange}
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded" style={{borderColor: '#2563eb'}}
               required
             />
             <input
@@ -191,7 +161,7 @@ function Auth() {
               placeholder="City/Village"
               value={form.city}
               onChange={handleChange}
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded" style={{borderColor: '#2563eb'}}
               required
             />
             <input
@@ -200,7 +170,7 @@ function Auth() {
               placeholder="Guardian Number"
               value={form.guardian}
               onChange={handleChange}
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded" style={{borderColor: '#2563eb'}}
               required
             />
             <input
@@ -215,17 +185,17 @@ function Auth() {
               inputMode="numeric"
               pattern="\d{12}"
               maxLength={12}
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded" style={{borderColor: '#2563eb'}}
               required
             />
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-bold text-orange-700 mb-2">🏠 Room Number:</label>
+                <label className="block text-sm font-bold mb-2" style={{color: '#1e293b'}}>Room Number:</label>
                 <select
                   name="room"
                   value={form.room}
                   onChange={handleSelectChange}
-                  className="w-full border-2 border-yellow-300 p-2 rounded-lg focus:border-orange-500 focus:outline-none bg-gradient-to-r from-yellow-50 to-orange-50"
+                  className="w-full border-2 p-2 rounded-lg focus:outline-none" style={{borderColor: '#2563eb', backgroundColor: '#f8fafc'}}
                   required
                 >
                   <option value="">Select Room</option>
@@ -237,12 +207,12 @@ function Auth() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-bold text-orange-700 mb-2">🛏️ Bed Number:</label>
+                <label className="block text-sm font-bold mb-2" style={{color: '#1e293b'}}>Bed Number:</label>
                 <select
                   name="bed"
                   value={form.bed}
                   onChange={handleSelectChange}
-                  className="w-full border-2 border-yellow-300 p-2 rounded-lg focus:border-orange-500 focus:outline-none bg-gradient-to-r from-yellow-50 to-orange-50"
+                  className="w-full border-2 p-2 rounded-lg focus:outline-none" style={{borderColor: '#2563eb', backgroundColor: '#f8fafc'}}
                   required
                 >
                   <option value="">Select Bed</option>
@@ -285,8 +255,8 @@ function Auth() {
               </button>
             </div>
           )}
-        <button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-red-600 transition font-bold">
-          {isLogin ? "🪔 Login 🪔" : "📝 Register 📝"}
+        <button type="submit" className="w-full text-white px-4 py-2 rounded-lg transition font-bold" style={{backgroundColor: '#2563eb'}} onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#1d4ed8'} onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#2563eb'}>
+          {isLogin ? "Login" : "Register"}
         </button>
         </form>
       )}
@@ -299,7 +269,7 @@ function Auth() {
                 placeholder="Registered Email"
                 value={resetEmail}
                 onChange={(e) => setResetEmail(e.target.value)}
-                className="w-full border p-2 rounded"
+                className="w-full border p-2 rounded" style={{borderColor: '#2563eb'}}
                 required
               />
               <div className="flex items-center justify-between">
@@ -310,8 +280,8 @@ function Auth() {
                 >
                   Back to login
                 </button>
-                <button type="submit" className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-red-600 transition font-bold">
-                  📧 Send OTP
+                <button type="submit" className="text-white px-4 py-2 rounded-lg transition font-bold" style={{backgroundColor: '#2563eb'}} onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#1d4ed8'} onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#2563eb'}>
+                  Send OTP
                 </button>
               </div>
             </form>
@@ -338,7 +308,7 @@ function Auth() {
                 placeholder="New Password"
                 value={resetPassword}
                 onChange={(e) => setResetPassword(e.target.value)}
-                className="w-full border p-2 rounded"
+                className="w-full border p-2 rounded" style={{borderColor: '#2563eb'}}
                 required
               />
               <div className="flex items-center justify-between">
@@ -353,23 +323,20 @@ function Auth() {
                 >
                   Back to email
                 </button>
-                <button type="submit" className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-red-600 transition font-bold">
-                  🪔 Reset Password
+                <button type="submit" className="text-white px-4 py-2 rounded-lg transition font-bold" style={{backgroundColor: '#2563eb'}} onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#1d4ed8'} onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#2563eb'}>
+                  Reset Password
                 </button>
               </div>
             </form>
           )}
         </>
         )}
-        <p className="mt-4 text-center text-orange-700 font-medium">
+        <p className="mt-4 text-center font-medium" style={{color: '#64748b'}}>
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-          <button className="text-orange-600 font-bold hover:text-red-600 transition" onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? "📝 Register 📝" : "🔑 Login 🔑"}
+          <button className="font-bold transition" style={{color: '#2563eb'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#1d4ed8'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#2563eb'} onClick={() => setIsLogin(!isLogin)}>
+            {isLogin ? "Register" : "Login"}
           </button>
         </p>
-        <div className="text-center mt-4">
-          <p className="text-sm font-bold text-orange-600">🪔 Happy Diwali! May your home be filled with light and joy! 🪔</p>
-        </div>
       </div>
     </div>
   );

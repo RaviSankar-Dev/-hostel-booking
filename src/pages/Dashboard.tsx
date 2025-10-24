@@ -145,50 +145,18 @@ function Dashboard() {
   if (!student) return <p className="text-center mt-10">Loading...</p>;
 
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-6 bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 min-h-screen relative">
-      {/* Left Side Firecrackers */}
-      <div className="fixed left-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Right Side Firecrackers */}
-      <div className="fixed right-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Mobile Firecrackers - Top */}
-      <div className="absolute top-2 left-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🧨</div>
-        <div className="text-xl animate-pulse">💥</div>
-      </div>
-      <div className="absolute top-2 right-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🎆</div>
-        <div className="text-xl animate-pulse">✨</div>
-      </div>
-      {/* Diwali Header */}
-      <div className="w-full text-center py-3 bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white rounded-xl shadow-lg mb-6">
-        <h2 className="text-xl font-bold">🎆 Happy Diwali! 🪔</h2>
-        <p className="text-sm">May this festival of lights bring joy to your stay</p>
-      </div>
+    <div className="max-w-5xl mx-auto p-6 space-y-6 min-h-screen bg-white">
       
-      <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent text-center">
-        🏠 Welcome, {student.name} 🏠
+      <h1 className="text-3xl font-bold mb-6 text-center" style={{color: '#1e293b'}}>
+        Welcome, {student.name}
       </h1>
 
       {/* Modern Profile Section */}
-      <section className="mb-8 p-8 bg-gradient-to-br from-white via-yellow-50 to-orange-50 rounded-2xl shadow-2xl border-4 border-yellow-300 hover:shadow-3xl transition-all duration-300">
+      <section className="mb-8 p-8 bg-white rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300" style={{border: '4px solid #2563eb'}}>
         <div className="flex flex-col md:flex-row items-center gap-6">
           {/* Profile Picture */}
           <div className="relative">
-            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-yellow-400 shadow-xl">
+            <div className="w-32 h-32 rounded-full overflow-hidden shadow-xl" style={{border: '4px solid #2563eb'}}>
               {student.profilePicture ? (
                 <img 
                   src={student.profilePicture} 
@@ -196,14 +164,17 @@ function Dashboard() {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
+                <div className="w-full h-full flex items-center justify-center" style={{background: 'linear-gradient(135deg, #F9A825 0%, #FFB74D 100%)'}}>
                   <span className="text-4xl text-white font-bold">{student.name.charAt(0)}</span>
                 </div>
               )}
             </div>
             <button
               onClick={() => setShowProfileModal(true)}
-              className="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+              className="absolute -bottom-2 -right-2 w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+              style={{backgroundColor: '#FF7043'}}
+              onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#FF5722'}
+              onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#FF7043'}
             >
               <span className="text-white text-lg">📷</span>
             </button>
@@ -211,26 +182,26 @@ function Dashboard() {
 
           {/* Profile Info */}
           <div className="flex-1 text-center md:text-left">
-            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-              👤 {student.name} 👤
+            <h2 className="text-3xl font-bold mb-4" style={{color: '#2C3E50'}}>
+              {student.name}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-orange-800">
-              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{color: '#2C3E50'}}>
+              <div className="p-3 rounded-lg" style={{backgroundColor: '#F5F7FA', border: '2px solid #4CAF50'}}>
                 <span className="font-bold">📧 Email:</span> {student.email}
               </div>
-              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+              <div className="p-3 rounded-lg" style={{backgroundColor: '#F5F7FA', border: '2px solid #4CAF50'}}>
                 <span className="font-bold">🏙️ City/Village:</span> {student.city}
               </div>
-              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+              <div className="p-3 rounded-lg" style={{backgroundColor: '#F5F7FA', border: '2px solid #4CAF50'}}>
                 <span className="font-bold">👨‍👩‍👧‍👦 Guardian:</span> {student.guardian}
               </div>
-              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+              <div className="p-3 rounded-lg" style={{backgroundColor: '#F5F7FA', border: '2px solid #4CAF50'}}>
                 <span className="font-bold">🆔 Aadhaar:</span> {student.aadhaar}
               </div>
-              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+              <div className="p-3 rounded-lg" style={{backgroundColor: '#F5F7FA', border: '2px solid #4CAF50'}}>
                 <span className="font-bold">🏠 Room:</span> {student.room}
               </div>
-              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg border-2 border-yellow-300">
+              <div className="p-3 rounded-lg" style={{backgroundColor: '#F5F7FA', border: '2px solid #4CAF50'}}>
                 <span className="font-bold">🛏️ Bed:</span> {student.bed || "Not Assigned"}
               </div>
             </div>
@@ -239,13 +210,13 @@ function Dashboard() {
       </section>
 
       {/* Food Menu Accordion */}
-      <section className="mb-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300">
+      <section className="mb-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #F9A825'}}>
         <button
           onClick={() => setFoodOpen(!foodOpen)}
           className="w-full flex items-center justify-between p-6"
         >
-          <h2 className="text-2xl font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">🍛 Food Menu 🍛</h2>
-          {foodOpen ? <ChevronUp className="text-orange-600" /> : <ChevronDown className="text-orange-600" />}
+          <h2 className="text-2xl font-semibold" style={{color: '#2C3E50'}}>Food Menu</h2>
+          {foodOpen ? <ChevronUp style={{color: '#4CAF50'}} /> : <ChevronDown style={{color: '#4CAF50'}} />}
         </button>
         {foodOpen && (
           <div className="px-6 pb-6 space-y-3">
@@ -264,13 +235,13 @@ function Dashboard() {
       </section>
 
       {/* Facilities Accordion */}
-      <section className="mb-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300">
+      <section className="mb-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #F9A825'}}>
         <button
           onClick={() => setFacilitiesOpen(!facilitiesOpen)}
           className="w-full flex items-center justify-between p-6"
         >
-          <h2 className="text-2xl font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">🏠 Facilities 🏠</h2>
-          {facilitiesOpen ? <ChevronUp className="text-orange-600" /> : <ChevronDown className="text-orange-600" />}
+          <h2 className="text-2xl font-semibold" style={{color: '#2C3E50'}}>Facilities</h2>
+          {facilitiesOpen ? <ChevronUp style={{color: '#4CAF50'}} /> : <ChevronDown style={{color: '#4CAF50'}} />}
         </button>
         {facilitiesOpen && (
           <div className="px-6 pb-6">
@@ -282,9 +253,9 @@ function Dashboard() {
       </section>
 
       {/* Complaints Section */}
-      <section className="mb-6 p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300">
+      <section className="mb-6 p-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #FF7043'}}>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">📝 Complaints 📝</h2>
+          <h2 className="text-2xl font-semibold" style={{color: '#2C3E50'}}>Complaints</h2>
           {!complaintEnabled && (
             <span className="text-red-600 font-medium bg-red-100 px-3 py-1 rounded-full">
               🚫 Complaint box disabled by Admin
@@ -319,9 +290,12 @@ function Dashboard() {
             </div>
             <button
               type="submit"
-              className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-orange-500 to-red-600 text-white py-2 rounded-lg font-bold"
+              className="flex items-center justify-center gap-2 w-full text-white py-2 rounded-lg font-bold"
+              style={{backgroundColor: '#4CAF50'}}
+              onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#45a049'}
+              onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#4CAF50'}
             >
-              <Send className="w-5 h-5" /> 📝 Submit Complaint
+              <Send className="w-5 h-5" /> Submit Complaint
             </button>
           </form>
         )}
@@ -352,8 +326,8 @@ function Dashboard() {
       </section>
 
       {/* Payment Status */}
-      <section className="mb-6 p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg border-2 border-yellow-300">
-        <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">💳 Payment Status 💳</h2>
+      <section className="mb-6 p-6 bg-white rounded-xl shadow-lg" style={{border: '2px solid #4CAF50'}}>
+        <h2 className="text-2xl font-semibold mb-4" style={{color: '#2C3E50'}}>Payment Status</h2>
         <ul className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {months.map((m) => {
             const status = student.payments?.[m] || "Pending";
@@ -372,16 +346,16 @@ function Dashboard() {
           })}
         </ul>
         <div className="text-center mt-6">
-          <p className="text-lg font-bold text-orange-600">🪔 Happy Diwali! May your stay be filled with light and joy! 🪔</p>
+          <p className="text-lg font-bold" style={{color: '#FF7043'}}>Welcome to your new home!</p>
         </div>
       </section>
 
       {/* Profile Picture Modal */}
       {showProfileModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-8 max-w-lg w-full mx-4 shadow-2xl border-4 border-yellow-400">
-            <h3 className="text-2xl font-bold text-center mb-6 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-              📷 Update Profile Picture 📷
+          <div className="bg-white rounded-2xl p-8 max-w-lg w-full mx-4 shadow-2xl border-4 border-yellow-300">
+            <h3 className="text-2xl font-bold text-center mb-6 text-yellow-800">
+              Update Profile Picture
             </h3>
             
             {/* Preview */}
@@ -401,8 +375,8 @@ function Dashboard() {
             <div className="space-y-4">
               {/* Camera Capture */}
               <div className="text-center">
-                <label className="block text-sm font-bold text-orange-700 mb-3">
-                  📸 Take Photo or Upload Image:
+                <label className="block text-sm font-bold text-yellow-700 mb-3">
+                  Take Photo or Upload Image:
                 </label>
                 <div className="flex flex-col gap-3">
                   <input
@@ -415,7 +389,7 @@ function Dashboard() {
                   />
                   <label
                     htmlFor="camera-input"
-                    className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 px-6 rounded-lg font-bold hover:from-orange-600 hover:to-red-600 transition cursor-pointer flex items-center justify-center gap-2"
+                    className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-bold transition cursor-pointer flex items-center justify-center gap-2"
                   >
                     📷 Take Photo / Upload Image
                   </label>
@@ -424,15 +398,15 @@ function Dashboard() {
 
               {/* Alternative URL Input */}
               <div>
-                <label className="block text-sm font-bold text-orange-700 mb-2">
-                  🔗 Or Enter Image URL:
+                <label className="block text-sm font-bold text-yellow-700 mb-2">
+                  Or Enter Image URL:
                 </label>
                 <input
                   type="url"
                   value={profilePicture}
                   onChange={(e) => setProfilePicture(e.target.value)}
                   placeholder="Enter image URL (optional)"
-                  className="w-full p-3 border-2 border-yellow-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                  className="w-full p-3 border-2 border-yellow-300 rounded-lg focus:border-yellow-500 focus:outline-none"
                 />
               </div>
 

@@ -35,42 +35,10 @@ function Rooms() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 min-h-screen relative">
-      {/* Left Side Firecrackers */}
-      <div className="fixed left-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Right Side Firecrackers */}
-      <div className="fixed right-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Mobile Firecrackers - Top */}
-      <div className="absolute top-2 left-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🧨</div>
-        <div className="text-xl animate-pulse">💥</div>
-      </div>
-      <div className="absolute top-2 right-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🎆</div>
-        <div className="text-xl animate-pulse">✨</div>
-      </div>
-      {/* Diwali Header */}
-      <div className="w-full text-center py-4 bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white rounded-xl shadow-lg mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold">🎆 Happy Diwali! 🪔</h2>
-        <p className="text-sm md:text-base mt-1">Special Diwali offers on room bookings!</p>
-      </div>
+    <div className="max-w-7xl mx-auto p-6 min-h-screen bg-white">
       
-      <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-        🏠 Our Rooms 🏠
+      <h2 className="text-4xl font-bold mb-12 text-center" style={{color: '#1e293b'}}>
+        Our Rooms
       </h2>
 
       <Swiper
@@ -87,24 +55,24 @@ function Rooms() {
       >
         {rooms.map((room, i) => (
           <SwiperSlide key={i}>
-            <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden border-2 border-yellow-300">
+            <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden" style={{border: '2px solid #2563eb'}}>
               <img
                 src={room.img}
                 alt={room.name}
                 className="w-full h-56 object-cover"
               />
               <div className="p-5">
-                <h3 className="text-lg font-bold text-orange-800">
-                  🏠 {room.name}
+                <h3 className="text-lg font-bold" style={{color: '#1e293b'}}>
+                  {room.name}
                 </h3>
-                <p className="text-sm text-orange-600 mt-1 font-medium">
-                  ✨ Comfortable & Spacious ✨
+                <p className="text-sm mt-1 font-medium" style={{color: '#64748b'}}>
+                  Comfortable & Spacious
                 </p>
-                <div className="mt-2 text-xs text-yellow-600 font-bold">
-                  🪔 Diwali Special Offer Available! 🪔
+                <div className="mt-2 text-xs font-bold" style={{color: '#2563eb'}}>
+                  Modern Amenities Available
                 </div>
-                <button className="mt-3 w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 rounded-lg hover:from-orange-600 hover:to-red-600 transition font-bold">
-                  🪔 View Details 🪔
+                <button className="mt-3 w-full text-white py-2 rounded-lg transition font-bold" style={{backgroundColor: '#2563eb'}} onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#1d4ed8'} onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#2563eb'}>
+                  View Details
                 </button>
               </div>
             </div>
@@ -114,9 +82,9 @@ function Rooms() {
 
       {/* Location Map */}
       <section className="mt-16">
-        <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent text-center">📍 Find Us 📍</h3>
-        <p className="text-center text-orange-700 mb-6 font-medium">🏠 {address} 🏠</p>
-        <div className="w-full h-80 md:h-96 rounded-xl overflow-hidden shadow-lg border-4 border-yellow-400">
+        <h3 className="text-3xl font-bold mb-4 text-center" style={{color: '#1e293b'}}>Find Us</h3>
+        <p className="text-center mb-6 font-medium" style={{color: '#64748b'}}>{address}</p>
+        <div className="w-full h-80 md:h-96 rounded-xl overflow-hidden shadow-lg" style={{border: '4px solid #2563eb'}}>
           <iframe
             className="w-full h-full"
             loading="lazy"
@@ -131,7 +99,10 @@ function Rooms() {
             href="https://maps.app.goo.gl/9jVRLUemnfhfBJfR8?g_st=aw"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-5 py-2 rounded-lg hover:from-orange-600 hover:to-red-600 transition font-bold"
+            className="inline-flex items-center gap-2 text-white px-5 py-2 rounded-lg transition font-bold"
+            style={{backgroundColor: '#2563eb'}}
+            onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#1d4ed8'}
+            onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#2563eb'}
           >
             🗺️ Open in Google Maps
           </a>
@@ -141,14 +112,23 @@ function Rooms() {
               setCopied(true);
               setTimeout(() => setCopied(false), 1500);
             }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-lg hover:from-yellow-200 hover:to-orange-200 border-2 border-yellow-400 transition font-bold"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg transition font-bold"
+            style={{backgroundColor: '#dbeafe', color: '#1e293b', border: '2px solid #2563eb'}}
+            onMouseEnter={(e) => {
+              (e.target as HTMLElement).style.backgroundColor = '#bfdbfe';
+              (e.target as HTMLElement).style.borderColor = '#1d4ed8';
+            }}
+            onMouseLeave={(e) => {
+              (e.target as HTMLElement).style.backgroundColor = '#dbeafe';
+              (e.target as HTMLElement).style.borderColor = '#2563eb';
+            }}
             aria-label="Copy address"
           >
             {copied ? "📋 Copied!" : "📋 Copy Address"}
           </button>
         </div>
         <div className="text-center mt-6">
-          <p className="text-lg font-bold text-orange-600">🪔 Happy Diwali! May your journey to our PG be filled with light and joy! 🪔</p>
+          <p className="text-lg font-bold" style={{color: '#2563eb'}}>Welcome to your new home!</p>
         </div>
       </section>
     </div>

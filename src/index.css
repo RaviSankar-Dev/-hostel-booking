@@ -3,9 +3,61 @@
 @layer base {
   body {
     cursor: url("/cursors/trident.cur"), auto;
+    background: #ffffff;
+    min-height: 100vh;
   }
 
   .dashboard-cursor {
     cursor: url("/cursors/fairy.cur"), auto;
+  }
+
+  /* Professional Blue and White Theme */
+  :root {
+    --primary-blue: #2563eb;
+    --secondary-blue: #1d4ed8;
+    --light-blue: #dbeafe;
+    --background-white: #ffffff;
+    --text-dark: #1e293b;
+    --text-light: #64748b;
+  }
+
+  .primary-blue {
+    background-color: #2563eb;
+  }
+
+  .secondary-blue {
+    background-color: #1d4ed8;
+  }
+
+  .light-blue {
+    background-color: #dbeafe;
+  }
+
+  .background-white {
+    background-color: #ffffff;
+  }
+
+  .text-dark {
+    color: #1e293b;
+  }
+
+  .text-light {
+    color: #64748b;
+  }
+
+  .primary-blue-text {
+    color: #2563eb;
+  }
+
+  .secondary-blue-text {
+    color: #1d4ed8;
+  }
+
+  .primary-border {
+    border-color: #2563eb;
+  }
+
+  .secondary-border {
+    border-color: #1d4ed8;
   }
 }

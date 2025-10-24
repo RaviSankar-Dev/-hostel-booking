@@ -45,41 +45,9 @@ function FoodMenu() {
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto p-8 bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 min-h-screen relative">
-      {/* Left Side Firecrackers */}
-      <div className="fixed left-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Right Side Firecrackers */}
-      <div className="fixed right-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Mobile Firecrackers - Top */}
-      <div className="absolute top-2 left-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🧨</div>
-        <div className="text-xl animate-pulse">💥</div>
-      </div>
-      <div className="absolute top-2 right-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🎆</div>
-        <div className="text-xl animate-pulse">✨</div>
-      </div>
-      {/* Diwali Header */}
-      <div className="w-full text-center py-4 bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white rounded-xl shadow-lg mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold">🎆 Happy Diwali! 🪔</h2>
-        <p className="text-sm md:text-base mt-1">May our delicious food bring joy to your celebrations</p>
-      </div>
+    <div className="max-w-6xl mx-auto p-8 min-h-screen bg-white">
       
-      <h2 className="text-4xl font-extrabold text-center mb-12 bg-gradient-to-r from-orange-600 to-red-600 text-transparent bg-clip-text">
+      <h2 className="text-4xl font-extrabold text-center mb-12" style={{color: '#1e293b'}}>
         🍛 Weekly Food Menu 🍛
       </h2>
 
@@ -87,22 +55,22 @@ function FoodMenu() {
         {menu.map((dayMenu, index) => (
           <div
             key={index}
-            className="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-yellow-300"
+            className="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500" style={{border: '4px solid #2563eb'}}
           >
             <img
               src={dayMenu.img}
               alt={dayMenu.day}
               className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-orange-900/80 via-yellow-600/30 to-transparent"></div>
+            <div className="absolute inset-0" style={{background: 'linear-gradient(to top, rgba(30, 41, 59, 0.8) 0%, rgba(37, 99, 235, 0.3) 50%, transparent 100%)'}}></div>
             <div className="absolute bottom-5 left-0 right-0 px-4 text-center">
               <h3 className="text-xl font-bold text-white mb-2 drop-shadow-lg">{dayMenu.day}</h3>
               <p className="text-sm font-medium drop-shadow-md">
-                <strong className="text-yellow-200">🍳 Breakfast:</strong> <span className="text-yellow-100">{dayMenu.items.breakfast}</span><br/>
-                <strong className="text-yellow-200">🍽️ Lunch:</strong> <span className="text-yellow-100">{dayMenu.items.lunch}</span><br/>
-                <strong className="text-yellow-200">🍴 Dinner:</strong> <span className="text-yellow-100">{dayMenu.items.dinner}</span>
+                <strong className="text-white">🍳 Breakfast:</strong> <span className="text-white">{dayMenu.items.breakfast}</span><br/>
+                <strong className="text-white">🍽️ Lunch:</strong> <span className="text-white">{dayMenu.items.lunch}</span><br/>
+                <strong className="text-white">🍴 Dinner:</strong> <span className="text-white">{dayMenu.items.dinner}</span>
               </p>
-              <div className="mt-2 text-xs text-yellow-200 font-bold">
+              <div className="mt-2 text-xs text-white font-bold">
                 ✨ Diwali Special Menu ✨
               </div>
             </div>
@@ -111,8 +79,8 @@ function FoodMenu() {
       </div>
       
       {/* Diwali Footer */}
-      <div className="text-center mt-12 p-6 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl border-2 border-yellow-400">
-        <p className="text-lg font-bold text-orange-600">🪔 Happy Diwali! May our delicious food light up your celebrations with joy and flavor! 🪔</p>
+      <div className="text-center mt-12 p-6 bg-white rounded-xl" style={{border: '2px solid #2563eb'}}>
+        <p className="text-lg font-bold" style={{color: '#2563eb'}}>Welcome to your new home!</p>
       </div>
     </div>
   );

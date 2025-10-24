@@ -25,14 +25,16 @@ function Navbar() {
   ];
 
   return (
-    <nav className="bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white sticky top-0 z-50 shadow-lg border-b-4 border-yellow-400">
+    <nav className="text-white sticky top-0 z-50 shadow-lg" style={{background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)', borderBottom: '4px solid #2563eb'}}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <h1
-          className="font-bold text-2xl tracking-wide cursor-pointer hover:text-yellow-200 transition-colors"
+          className="font-bold text-2xl tracking-wide cursor-pointer transition-colors"
           onClick={() => navigate("/")}
+          onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#dbeafe'}
+          onMouseLeave={(e) => (e.target as HTMLElement).style.color = 'white'}
         >
-          🏠 Gayatri Ladies Hostel 🪔
+          Gayatri Ladies Hostel
         </h1>
 
         {/* Desktop Links */}
@@ -43,7 +45,15 @@ function Navbar() {
               <Link
                 key={link.name}
                 to={link.path}
-                className="hover:text-yellow-200 transition-colors duration-300 font-medium hover:bg-yellow-500/20 px-3 py-1 rounded-lg"
+                className="transition-colors duration-300 font-medium px-3 py-1 rounded-lg"
+                onMouseEnter={(e) => {
+                  (e.target as HTMLElement).style.color = '#dbeafe';
+                  (e.target as HTMLElement).style.backgroundColor = 'rgba(219, 234, 254, 0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.target as HTMLElement).style.color = 'white';
+                  (e.target as HTMLElement).style.backgroundColor = 'transparent';
+                }}
               >
                 {link.name === "Home" ? "🏠 Home" : 
                  link.name === "Rooms" ? "🏠 Rooms" :
@@ -57,7 +67,10 @@ function Navbar() {
             <>
               <Link
                 to="/dashboard"
-                className="bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-lg hover:from-yellow-200 hover:to-orange-200 transition font-bold border-2 border-yellow-400"
+                className="text-white px-4 py-2 rounded-lg transition font-bold"
+                style={{backgroundColor: '#2563eb'}}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#1d4ed8'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#2563eb'}
               >
                 📊 Student Dashboard
               </Link>
@@ -74,7 +87,10 @@ function Navbar() {
             <>
               <Link
                 to="/admin"
-                className="bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-lg hover:from-yellow-200 hover:to-orange-200 transition font-bold border-2 border-yellow-400"
+                className="text-white px-4 py-2 rounded-lg transition font-bold"
+                style={{backgroundColor: '#2563eb'}}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#1d4ed8'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#2563eb'}
               >
                 🎆 Admin Dashboard
               </Link>
@@ -107,14 +123,22 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-gradient-to-r from-orange-700 via-yellow-600 to-red-700 px-6 py-4 space-y-4 flex flex-col">
+        <div className="md:hidden px-6 py-4 space-y-4 flex flex-col" style={{background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)'}}>
           {!currentUser && !currentAdmin &&
             commonLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className="hover:text-yellow-200 transition-colors duration-300 font-medium hover:bg-yellow-500/20 px-3 py-1 rounded-lg"
+                className="transition-colors duration-300 font-medium px-3 py-1 rounded-lg"
+                onMouseEnter={(e) => {
+                  (e.target as HTMLElement).style.color = '#dbeafe';
+                  (e.target as HTMLElement).style.backgroundColor = 'rgba(219, 234, 254, 0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.target as HTMLElement).style.color = 'white';
+                  (e.target as HTMLElement).style.backgroundColor = 'transparent';
+                }}
               >
                 {link.name === "Home" ? "🏠 Home" : 
                  link.name === "Rooms" ? "🏠 Rooms" :
@@ -129,7 +153,10 @@ function Navbar() {
               <Link
                 to="/dashboard"
                 onClick={() => setIsOpen(false)}
-                className="bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-lg hover:from-yellow-200 hover:to-orange-200 transition font-bold border-2 border-yellow-400"
+                className="text-white px-4 py-2 rounded-lg transition font-bold"
+                style={{backgroundColor: '#2563eb'}}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#1d4ed8'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#2563eb'}
               >
                 📊 Student Dashboard
               </Link>
@@ -147,7 +174,10 @@ function Navbar() {
               <Link
                 to="/admin"
                 onClick={() => setIsOpen(false)}
-                className="bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-lg hover:from-yellow-200 hover:to-orange-200 transition font-bold border-2 border-yellow-400"
+                className="text-white px-4 py-2 rounded-lg transition font-bold"
+                style={{backgroundColor: '#2563eb'}}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#1d4ed8'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#2563eb'}
               >
                 🎆 Admin Dashboard
               </Link>

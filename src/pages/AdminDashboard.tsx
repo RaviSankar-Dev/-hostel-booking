@@ -104,112 +104,84 @@ function AdminDashboard() {
   if (loading) return <Loader />;
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 relative">
-      {/* Left Side Firecrackers */}
-      <div className="fixed left-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Right Side Firecrackers */}
-      <div className="fixed right-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Mobile Firecrackers - Top */}
-      <div className="absolute top-2 left-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🧨</div>
-        <div className="text-xl animate-pulse">💥</div>
-      </div>
-      <div className="absolute top-2 right-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🎆</div>
-        <div className="text-xl animate-pulse">✨</div>
-      </div>
+    <div className="flex min-h-screen bg-white relative">
       {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-orange-600 via-yellow-500 to-red-600 text-white p-6 hidden md:flex flex-col">
-        <h2 className="text-2xl font-bold mb-6">🎆 Admin Panel 🪔</h2>
+      <aside className="w-64 text-white p-6 hidden md:flex flex-col" style={{background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)'}}>
+        <h2 className="text-2xl font-bold mb-6">Admin Panel</h2>
         <nav className="flex flex-col space-y-3">
           <button
             onClick={() => setActiveTab("students")}
             className={`flex items-center space-x-2 p-2 rounded ${
-              activeTab === "students" ? "bg-yellow-600" : "hover:bg-yellow-500"
+              activeTab === "students" ? "bg-blue-600" : "hover:bg-blue-500"
             }`}
           >
-            <Users size={18} /> <span>👥 Students</span>
+            <Users size={18} /> <span>Students</span>
           </button>
           <button
             onClick={() => setActiveTab("food")}
             className={`flex items-center space-x-2 p-2 rounded ${
-              activeTab === "food" ? "bg-yellow-600" : "hover:bg-yellow-500"
+              activeTab === "food" ? "bg-blue-600" : "hover:bg-blue-500"
             }`}
           >
-            <Utensils size={18} /> <span>🍛 Food Menu</span>
+            <Utensils size={18} /> <span>Food Menu</span>
           </button>
           <button
             onClick={() => setActiveTab("facilities")}
             className={`flex items-center space-x-2 p-2 rounded ${
-              activeTab === "facilities" ? "bg-yellow-600" : "hover:bg-yellow-500"
+              activeTab === "facilities" ? "bg-blue-600" : "hover:bg-blue-500"
             }`}
           >
-            <Settings size={18} /> <span>🏠 Facilities</span>
+            <Settings size={18} /> <span>Facilities</span>
           </button>
           <button
             onClick={() => setActiveTab("complaints")}
             className={`flex items-center space-x-2 p-2 rounded ${
-              activeTab === "complaints" ? "bg-yellow-600" : "hover:bg-yellow-500"
+              activeTab === "complaints" ? "bg-blue-600" : "hover:bg-blue-500"
             }`}
           >
-            <AlertCircle size={18} /> <span>📝 Complaints</span>
+            <AlertCircle size={18} /> <span>Complaints</span>
           </button>
         </nav>
         <button
           onClick={handleLogout}
-          className="mt-auto flex items-center space-x-2 bg-red-500 px-3 py-2 rounded hover:bg-red-600 font-bold"
+          className="mt-auto flex items-center space-x-2 px-3 py-2 rounded font-bold" style={{backgroundColor: '#dc2626'}} onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#b91c1c'} onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#dc2626'}
         >
-          <LogOut size={18} /> <span>🚪 Logout</span>
+          <LogOut size={18} /> <span>Logout</span>
         </button>
       </aside>
 
       {/* Main Content */}
       <main className="flex-1 p-6 space-y-6">
-        <div className="rounded-2xl p-6 bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white shadow">
-          <h1 className="text-3xl font-bold">🎆 Admin Dashboard 🪔</h1>
-          <p className="text-sm text-yellow-100 mt-1">Manage students, food menu, facilities, and complaints</p>
-          <p className="text-xs text-yellow-200 mt-1">✨ Happy Diwali! May your management be filled with light and joy! ✨</p>
+        <div className="rounded-2xl p-6 text-white shadow" style={{background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)'}}>
+          <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+          <p className="text-sm mt-1" style={{color: '#dbeafe'}}>Manage students, food menu, facilities, and complaints</p>
         </div>
 
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="rounded-xl bg-gradient-to-br from-yellow-50 to-orange-50 shadow-lg p-5 flex items-center justify-between border-2 border-yellow-300">
+          <div className="rounded-xl bg-white shadow-lg p-5 flex items-center justify-between" style={{border: '2px solid #2563eb'}}>
             <div>
-              <p className="text-sm text-orange-600 font-medium">👥 Total Students</p>
-              <p className="text-2xl font-bold text-orange-800">{students.length}</p>
+              <p className="text-sm font-medium" style={{color: '#64748b'}}>Total Students</p>
+              <p className="text-2xl font-bold" style={{color: '#1e293b'}}>{students.length}</p>
             </div>
-            <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 text-white flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg text-white flex items-center justify-center" style={{background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)'}}>
               <Users size={22} />
             </div>
           </div>
-          <div className="rounded-xl bg-gradient-to-br from-red-50 to-orange-50 shadow-lg p-5 flex items-center justify-between border-2 border-red-300">
+          <div className="rounded-xl bg-white shadow-lg p-5 flex items-center justify-between" style={{border: '2px solid #2563eb'}}>
             <div>
-              <p className="text-sm text-red-600 font-medium">📝 Complaints (Total)</p>
-              <p className="text-2xl font-bold text-red-800">{totalComplaints}</p>
+              <p className="text-sm font-medium" style={{color: '#64748b'}}>Complaints (Total)</p>
+              <p className="text-2xl font-bold" style={{color: '#1e293b'}}>{totalComplaints}</p>
             </div>
-            <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-red-400 to-orange-500 text-white flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg text-white flex items-center justify-center" style={{background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)'}}>
               <AlertCircle size={22} />
             </div>
           </div>
-          <div className="rounded-xl bg-gradient-to-br from-green-50 to-yellow-50 shadow-lg p-5 flex items-center justify-between border-2 border-green-300">
+          <div className="rounded-xl bg-white shadow-lg p-5 flex items-center justify-between" style={{border: '2px solid #2563eb'}}>
             <div>
-              <p className="text-sm text-green-600 font-medium">✅ Complaints (Enabled)</p>
-              <p className="text-2xl font-bold text-green-800">{enabledComplaints}</p>
+              <p className="text-sm font-medium" style={{color: '#64748b'}}>Complaints (Enabled)</p>
+              <p className="text-2xl font-bold" style={{color: '#1e293b'}}>{enabledComplaints}</p>
             </div>
-            <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-green-400 to-yellow-500 text-white flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg text-white flex items-center justify-center" style={{background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)'}}>
               <AlertCircle size={22} />
             </div>
           </div>
@@ -217,8 +189,8 @@ function AdminDashboard() {
 
         {/* Students */}
         {activeTab === "students" && (
-          <section className="bg-gradient-to-br from-yellow-50 to-orange-50 p-5 rounded-xl shadow-lg border-2 border-yellow-300">
-            <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">👥 Students 👥</h2>
+          <section className="bg-white p-5 rounded-xl shadow-lg" style={{border: '2px solid #2563eb'}}>
+            <h2 className="text-2xl font-semibold mb-4" style={{color: '#1e293b'}}>Students</h2>
             {students.length === 0 ? (
               <p className="text-gray-500">No students added yet.</p>
             ) : (

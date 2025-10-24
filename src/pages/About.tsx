@@ -43,47 +43,14 @@ function About() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 min-h-screen relative">
-      {/* Left Side Firecrackers */}
-      <div className="fixed left-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Right Side Firecrackers */}
-      <div className="fixed right-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Mobile Firecrackers - Top */}
-      <div className="absolute top-2 left-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🧨</div>
-        <div className="text-xl animate-pulse">💥</div>
-      </div>
-      <div className="absolute top-2 right-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🎆</div>
-        <div className="text-xl animate-pulse">✨</div>
-      </div>
-
-      {/* Diwali Header */}
-      <div className="w-full text-center py-4 bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white rounded-xl shadow-lg mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold">🎆 Happy Diwali! 🪔</h2>
-        <p className="text-sm md:text-base mt-1">Meet our amazing team who make Gayatri Ladies Hostel a home away from home</p>
-      </div>
+    <div className="max-w-7xl mx-auto p-6 min-h-screen bg-white">
 
       {/* About Us Header */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-4" style={{color: '#1e293b'}}>
           👥 About Our Team 👥
         </h1>
-        <p className="text-lg text-orange-700 font-medium max-w-3xl mx-auto">
+        <p className="text-lg font-medium max-w-3xl mx-auto" style={{color: '#64748b'}}>
           Our dedicated team of professionals brings years of experience in hospitality and student welfare to ensure you have the best possible living experience.
         </p>
       </div>
@@ -91,16 +58,16 @@ function About() {
       {/* Team Members */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
         {teamMembers.map((member, index) => (
-          <div key={index} className="bg-white rounded-2xl shadow-xl border-4 border-yellow-300 p-6 hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <div key={index} className="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-all duration-300 hover:scale-105" style={{border: '4px solid #4CAF50'}}>
             {/* Profile Image */}
             <div className="flex justify-center mb-6">
               <div className="relative">
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-32 h-32 rounded-full object-cover border-4 border-yellow-400 shadow-lg"
+                  className="w-32 h-32 rounded-full object-cover shadow-lg" style={{border: '4px solid #F9A825'}}
                 />
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center">
+                <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center" style={{backgroundColor: '#FF7043'}}>
                   <span className="text-white text-sm font-bold">⭐</span>
                 </div>
               </div>
@@ -108,10 +75,10 @@ function About() {
 
             {/* Member Info */}
             <div className="text-center mb-4">
-              <h3 className="text-2xl font-bold text-orange-800 mb-2">{member.name}</h3>
-              <p className="text-lg font-semibold text-orange-600 mb-1">{member.role}</p>
-              <div className="inline-block bg-gradient-to-r from-yellow-100 to-orange-100 px-4 py-2 rounded-full border-2 border-yellow-400">
-                <span className="text-orange-700 font-bold">⏰ {member.experience}</span>
+              <h3 className="text-2xl font-bold mb-2" style={{color: '#2C3E50'}}>{member.name}</h3>
+              <p className="text-lg font-semibold mb-1" style={{color: '#4CAF50'}}>{member.role}</p>
+              <div className="inline-block px-4 py-2 rounded-full" style={{backgroundColor: '#F5F7FA', border: '2px solid #F9A825'}}>
+                <span className="font-bold" style={{color: '#2C3E50'}}>⏰ {member.experience}</span>
               </div>
             </div>
 
@@ -122,10 +89,10 @@ function About() {
 
             {/* Specialties */}
             <div className="mb-4">
-              <h4 className="text-sm font-bold text-orange-700 mb-2">🎯 Specialties:</h4>
+              <h4 className="text-sm font-bold mb-2" style={{color: '#2C3E50'}}>🎯 Specialties:</h4>
               <div className="flex flex-wrap gap-2 justify-center">
                 {member.specialties.map((specialty, idx) => (
-                  <span key={idx} className="bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-medium border border-yellow-300">
+                  <span key={idx} className="px-3 py-1 rounded-full text-xs font-medium" style={{backgroundColor: '#F5F7FA', color: '#2C3E50', border: '1px solid #4CAF50'}}>
                     {specialty}
                   </span>
                 ))}
@@ -133,42 +100,42 @@ function About() {
             </div>
 
             {/* Achievement */}
-            <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-3 rounded-lg border-2 border-yellow-200">
-              <h4 className="text-sm font-bold text-orange-700 mb-1">🏆 Key Achievement:</h4>
-              <p className="text-xs text-orange-600">{member.achievements}</p>
+            <div className="p-3 rounded-lg" style={{backgroundColor: '#F5F7FA', border: '2px solid #4CAF50'}}>
+              <h4 className="text-sm font-bold mb-1" style={{color: '#2C3E50'}}>🏆 Key Achievement:</h4>
+              <p className="text-xs" style={{color: '#2C3E50'}}>{member.achievements}</p>
             </div>
           </div>
         ))}
       </div>
 
       {/* Company Stats */}
-      <div className="bg-gradient-to-r from-orange-100 to-yellow-100 rounded-2xl p-8 border-4 border-yellow-300 shadow-lg">
-        <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+      <div className="bg-white rounded-2xl p-8 shadow-lg" style={{border: '4px solid #FF7043'}}>
+        <h2 className="text-3xl font-bold text-center mb-8" style={{color: '#2C3E50'}}>
           🏆 Our Achievements 🏆
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="text-center">
-            <div className="text-4xl font-bold text-orange-600 mb-2">500+</div>
-            <div className="text-orange-700 font-semibold">Happy Residents</div>
+            <div className="text-4xl font-bold mb-2" style={{color: '#4CAF50'}}>500+</div>
+            <div className="font-semibold" style={{color: '#2C3E50'}}>Happy Residents</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-orange-600 mb-2">8+</div>
-            <div className="text-orange-700 font-semibold">Years Experience</div>
+            <div className="text-4xl font-bold mb-2" style={{color: '#4CAF50'}}>8+</div>
+            <div className="font-semibold" style={{color: '#2C3E50'}}>Years Experience</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-orange-600 mb-2">24/7</div>
-            <div className="text-orange-700 font-semibold">Support Available</div>
+            <div className="text-4xl font-bold mb-2" style={{color: '#4CAF50'}}>24/7</div>
+            <div className="font-semibold" style={{color: '#2C3E50'}}>Support Available</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-orange-600 mb-2">100%</div>
-            <div className="text-orange-700 font-semibold">Safety Record</div>
+            <div className="text-4xl font-bold mb-2" style={{color: '#4CAF50'}}>100%</div>
+            <div className="font-semibold" style={{color: '#2C3E50'}}>Safety Record</div>
           </div>
         </div>
       </div>
 
       {/* Diwali Footer */}
-      <div className="text-center mt-12 p-6 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl border-2 border-yellow-400">
-        <p className="text-lg font-bold text-orange-600">🪔 Happy Diwali! May our team continue to light up your lives with care and dedication! 🪔</p>
+      <div className="text-center mt-12 p-6 bg-white rounded-xl" style={{border: '2px solid #FF7043'}}>
+        <p className="text-lg font-bold" style={{color: '#FF7043'}}>Welcome to your new home!</p>
       </div>
     </div>
   );

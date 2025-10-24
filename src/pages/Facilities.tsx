@@ -25,42 +25,10 @@ function Facilities() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 min-h-screen relative">
-      {/* Left Side Firecrackers */}
-      <div className="fixed left-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Right Side Firecrackers */}
-      <div className="fixed right-4 top-1/4 z-10 hidden lg:block">
-        <div className="text-4xl animate-bounce">🧨</div>
-        <div className="text-3xl animate-pulse mt-2">💥</div>
-        <div className="text-2xl animate-bounce mt-3">🎆</div>
-        <div className="text-3xl animate-pulse mt-2">✨</div>
-        <div className="text-2xl animate-bounce mt-3">🎇</div>
-      </div>
-
-      {/* Mobile Firecrackers - Top */}
-      <div className="absolute top-2 left-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🧨</div>
-        <div className="text-xl animate-pulse">💥</div>
-      </div>
-      <div className="absolute top-2 right-2 z-10 lg:hidden">
-        <div className="text-2xl animate-bounce">🎆</div>
-        <div className="text-xl animate-pulse">✨</div>
-      </div>
-      {/* Diwali Header */}
-      <div className="w-full text-center py-4 bg-gradient-to-r from-orange-600 via-yellow-500 to-red-600 text-white rounded-xl shadow-lg mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold">🎆 Happy Diwali! 🪔</h2>
-        <p className="text-sm md:text-base mt-1">May our facilities bring light and comfort to your stay</p>
-      </div>
+    <div className="max-w-6xl mx-auto p-6 min-h-screen bg-white">
       
       <h2 className="text-4xl font-extrabold mb-12 text-center">
-        <span className="bg-gradient-to-r from-orange-600 to-red-600 text-transparent bg-clip-text">
+        <span style={{color: '#1e293b'}}>
           🏠 Our Facilities 🏠
         </span>
       </h2>
@@ -69,7 +37,7 @@ function Facilities() {
         {facilities.map((f, i) => (
           <div
             key={i}
-            className="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-yellow-300"
+            className="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500" style={{border: '4px solid #2563eb'}}
           >
             {/* Image */}
             <img
@@ -78,22 +46,65 @@ function Facilities() {
               className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
             />
             {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-orange-900/80 via-yellow-600/30 to-transparent"></div>
+            <div className="absolute inset-0" style={{background: 'linear-gradient(to top, rgba(30, 41, 59, 0.8) 0%, rgba(37, 99, 235, 0.3) 50%, transparent 100%)'}}></div>
             {/* Text */}
             <div className="absolute bottom-5 left-0 right-0 px-4 text-center">
               <h3 className="text-xl font-bold text-white mb-2 drop-shadow-lg">{f.name}</h3>
-              <p className="text-yellow-100 text-sm font-medium drop-shadow-md">{f.desc}</p>
-              <div className="mt-2 text-xs text-yellow-200 font-bold">
-                ✨ Diwali Special ✨
+              <p className="text-white text-sm font-medium drop-shadow-md">{f.desc}</p>
+              <div className="mt-2 text-xs text-white font-bold">
+                ✨ Premium Quality ✨
               </div>
             </div>
           </div>
         ))}
       </div>
       
-      {/* Diwali Footer */}
-      <div className="text-center mt-12 p-6 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl border-2 border-yellow-400">
-        <p className="text-lg font-bold text-orange-600">🪔 Happy Diwali! May our facilities light up your stay with comfort and joy! 🪔</p>
+      {/* PG Tour Video Section */}
+      <section className="mt-16">
+        <h3 className="text-3xl font-bold text-center mb-8" style={{color: '#1e293b'}}>
+          Take a Virtual Tour Through Our PGs
+        </h3>
+        <div className="bg-white rounded-2xl shadow-xl p-6" style={{border: '4px solid #2563eb'}}>
+          <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+            <video
+              className="w-full h-full object-cover"
+              controls
+              poster="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&auto=format&fit=crop&q=60"
+              preload="metadata"
+            >
+              <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4" />
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div className="mt-6 text-center">
+            <h4 className="text-xl font-semibold mb-3" style={{color: '#1e293b'}}>
+              Experience Our 5 Premium PG Locations
+            </h4>
+            <p className="text-gray-600 mb-4">
+              Watch as we take you on a guided tour through our different PG accommodations, 
+              showcasing the variety of rooms, facilities, and amenities available.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mt-6">
+              {[
+                { name: "PG 1" },
+                { name: "PG 2" },
+                { name: "PG 3" },
+                { name: "PG 4" },
+                { name: "PG 5" }
+              ].map((pg, index) => (
+                <div key={index} className="bg-gray-50 p-4 rounded-lg" style={{border: '2px solid #2563eb'}}>
+                  <h5 className="font-bold" style={{color: '#2563eb'}}>{pg.name}</h5>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Footer */}
+      <div className="text-center mt-12 p-6 bg-white rounded-xl" style={{border: '2px solid #2563eb'}}>
+        <p className="text-lg font-bold" style={{color: '#2563eb'}}>Welcome to your new home!</p>
       </div>
     </div>
   );
